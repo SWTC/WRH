@@ -1,0 +1,47 @@
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\STWC Timesheet.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\STWC Timesheet.pdb
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\Antlr3.Runtime.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.AspNet.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.Core.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.OAuth.Consumer.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.OAuth.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.OpenId.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\EntityFramework.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\Microsoft.Web.Infrastructure.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\Microsoft.Web.WebPages.OAuth.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\Newtonsoft.Json.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Net.Http.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Net.Http.WebRequest.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.Helpers.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.Mvc.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.Optimization.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.Razor.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.WebPages.Deployment.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.WebPages.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.WebPages.Razor.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\WebGrease.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\WebMatrix.Data.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\WebMatrix.WebData.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\EntityFramework.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\Newtonsoft.Json.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Net.Http.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Net.Http.WebRequest.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.Helpers.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.Mvc.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.Razor.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.WebPages.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.WebPages.Deployment.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\System.Web.WebPages.Razor.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\WebMatrix.Data.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\Microsoft.Web.WebPages.OAuth.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\WebMatrix.WebData.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.AspNet.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.Core.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.OAuth.Consumer.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.OAuth.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.OpenId.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\obj\Debug\STWC Timesheet.csprojResolveAssemblyReference.cache
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\obj\Debug\STWC Timesheet.dll
+D:\STCW\WRH\WRH\STWC Timesheet\STWC Timesheet\obj\Debug\STWC Timesheet.pdb

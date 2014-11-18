@@ -1,45 +1,93 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model STWC_Timesheet.Models.InputModel
+
+@{
+    ViewBag.Title = "Input Data";
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<section id="InputForm">
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="halfDiv" style="padding-right: 20px;">
+            <fieldset>
+                <legend>Calendar</legend>
+                
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Position)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(m => m.Position)
+                    @Html.ValidationMessageFor(m => m.Position)
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend></legend>
+            </fieldset>
         </div>
-    </section>
+        
+        <div class="halfDiv">
+            <fieldset>
+                <legend>Crew Information</legend>
+                
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Position)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(m => m.Position)
+                    @Html.ValidationMessageFor(m => m.Position)
+                </div>
+                
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.FullName)
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(m => m.FullName) @Html.ActionLink("Add Crew Member", "NewCrew") 
+                    @Html.ValidationMessageFor(m => m.FullName)
+                </div>
+                
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Comments)
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(m => m.Comments)
+                    @Html.ValidationMessageFor(m => m.Comments)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.ServiceTerms)
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(m => m.ServiceTerms)
+                    @Html.ValidationMessageFor(m => m.ServiceTerms)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.NonConformities)
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(m => m.NonConformities)
+                    @Html.ValidationMessageFor(m => m.NonConformities)
+                </div>
+                
+                <p>
+                    <input type="submit" value="Log On" />
+                </p>
+            </fieldset>
+        </div>
+    
+        <div>
+            <fieldset>
+                <legend></legend>
+            </fieldset>
+        </div>
 }
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
+</section>
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
-
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
