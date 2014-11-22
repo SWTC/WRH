@@ -1,0 +1,64 @@
+﻿@model STWC_Timesheet.user
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>user</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.user_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.user_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.firstname)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.firstname)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lastname)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lastname)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.rankid)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.rankid)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.signon_date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.signon_date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.signoff_date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.signoff_date)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.user_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,85 @@
+﻿@model STWC_Timesheet.user
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>user</legend>
+
+        @Html.HiddenFor(model => model.user_id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.user_name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.user_name)
+            @Html.ValidationMessageFor(model => model.user_name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.firstname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.firstname)
+            @Html.ValidationMessageFor(model => model.firstname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.lastname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.lastname)
+            @Html.ValidationMessageFor(model => model.lastname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.email)
+            @Html.ValidationMessageFor(model => model.email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.rankid)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.rankid)
+            @Html.ValidationMessageFor(model => model.rankid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.signon_date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.signon_date)
+            @Html.ValidationMessageFor(model => model.signon_date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.signoff_date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.signoff_date)
+            @Html.ValidationMessageFor(model => model.signoff_date)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

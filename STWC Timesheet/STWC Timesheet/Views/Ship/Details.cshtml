@@ -1,0 +1,22 @@
+﻿@model STWC_Timesheet.ship
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ship</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ship_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ship_name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ship_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

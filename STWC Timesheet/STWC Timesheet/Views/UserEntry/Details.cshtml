@@ -1,0 +1,43 @@
+﻿@model STWC_Timesheet.user_entry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>user_entry</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.user_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.user_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ship_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ship_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.work_date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.work_date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.comments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.comments)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.entry_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
