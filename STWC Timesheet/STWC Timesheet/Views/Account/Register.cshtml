@@ -10,26 +10,67 @@
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
 
-    <fieldset>
-        <legend>Registration Form</legend>
-        <ol>
-            <li>
+    <section class="regsection">
+        <div class="rowDiv">
+            <div class="colDiv">
+                @Html.LabelFor(m => m.RankId)
+                @Html.TextBoxFor(m => m.RankId)
+            </div>
+            <div class="colDiv">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+            </div>
+        </div>
+        <div class="rowDiv">
+            <div class="colDiv">
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName)
+            </div>
+            <div class="colDiv">
+                @Html.LabelFor(m => m.Passport_Number)
+                @Html.TextBoxFor(m => m.Passport_Number)
+            </div>
+        </div>
+        <div class="rowDiv">
+            <div class="colDiv">
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName)
+            </div>
+            <div class="colDiv">
+                @Html.LabelFor(m => m.CDC_Number)
+                @Html.TextBoxFor(m => m.CDC_Number)
+            </div>
+        </div>
+        <div class="rowDiv">
+            <div class="colDiv">
+                @Html.LabelFor(m => m.Signon_date)
+                @Html.TextBoxFor(m => m.Signon_date)
+            </div>
+        </div>
+    </section>
+    <section class="usersection">
+        <div class="rowDiv">
+            <div class="colDiv">
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
-            </li>
-            <li>
+            </div>
+            <div class="colDiv">
                 @Html.LabelFor(m => m.Password)
                 @Html.PasswordFor(m => m.Password)
-            </li>
-            <li>
+            </div>
+            <div class="colDiv">
                 @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
-            </li>
-        </ol>
+                @Html.TextBoxFor(m => m.ConfirmPassword)
+            </div>
+        </div>
+    
+</section>
+    <fieldset style="text-align: right;">
         <input type="submit" value="Register" />
     </fieldset>
+    
+    @Html.ValidationSummary()
 }
 
 @section Scripts {

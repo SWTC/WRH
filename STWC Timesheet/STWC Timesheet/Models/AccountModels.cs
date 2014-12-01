@@ -28,15 +28,6 @@ namespace STWC_Timesheet.Models
         public string UserName { get; set; }
     }
 
-    public class RegisterExternalLoginModel
-    {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-
-        public string ExternalLoginData { get; set; }
-    }
-
     public class LocalPasswordModel
     {
         [Required]
@@ -50,8 +41,8 @@ namespace STWC_Timesheet.Models
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
-        [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
+        [DataType(DataType.Password)]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
@@ -78,13 +69,41 @@ namespace STWC_Timesheet.Models
         public string UserName { get; set; }
 
         [Required]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Rank")]
+        public string RankId { get; set; }
+
+        [Required]
+        [Display(Name = "Sign On Date")]
+        public string Signon_date { get; set; }
+
+        [Required]
+        [Display(Name = "Pasport No.")]
+        public string Passport_Number { get; set; }
+
+        [Required]
+        [Display(Name = "CDC No.")]
+        public string CDC_Number { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
+        [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
