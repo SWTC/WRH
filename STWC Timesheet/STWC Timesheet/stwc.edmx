@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="stwcModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="stwcModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="stwcModelStoreContainer">
           <EntitySet Name="ships" EntityType="stwcModel.Store.ships" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="user_entry" EntityType="stwcModel.Store.user_entry" store:Type="Tables" Schema="dbo" />
@@ -16,6 +16,7 @@
           </Key>
           <Property Name="ship_id" Type="int" Nullable="false" />
           <Property Name="ship_name" Type="varchar" MaxLength="100" />
+          <Property Name="ship_IMO" Type="int" />
         </EntityType>
         <EntityType Name="user_entry">
           <Key>
@@ -39,17 +40,11 @@
           <Property Name="rankid" Type="int" />
           <Property Name="signon_date" Type="datetime" />
           <Property Name="signoff_date" Type="datetime" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="passport_number" Type="varchar" MaxLength="50" />
+          <Property Name="cdc_number" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6013: The table/view 'stwc.dbo.user_entry_hours' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-      
-      <EntityType Name="user_entry_hours">
-        <Property Name="entry_id" Type="int" />
-        <Property Name="start_time" Type="time" />
-        <Property Name="end_time" Type="time" />
-      </EntityType>-->
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="stwcModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -64,6 +59,7 @@
           </Key>
           <Property Name="ship_id" Type="Int32" Nullable="false" />
           <Property Name="ship_name" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="ship_IMO" />
         </EntityType>
         <EntityType Name="user_entry">
           <Key>
@@ -87,6 +83,9 @@
           <Property Name="rankid" Type="Int32" />
           <Property Name="signon_date" Type="DateTime" />
           <Property Name="signoff_date" Type="DateTime" />
+          <Property Type="String" Name="password" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="passport_number" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="cdc_number" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -97,6 +96,7 @@
           <EntitySetMapping Name="ships">
             <EntityTypeMapping TypeName="stwcModel.ship">
               <MappingFragment StoreEntitySet="ships">
+                <ScalarProperty Name="ship_IMO" ColumnName="ship_IMO" />
                 <ScalarProperty Name="ship_id" ColumnName="ship_id" />
                 <ScalarProperty Name="ship_name" ColumnName="ship_name" />
               </MappingFragment>
@@ -116,6 +116,9 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="stwcModel.user">
               <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="cdc_number" ColumnName="cdc_number" />
+                <ScalarProperty Name="passport_number" ColumnName="passport_number" />
+                <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="user_name" ColumnName="user_name" />
                 <ScalarProperty Name="firstname" ColumnName="firstname" />

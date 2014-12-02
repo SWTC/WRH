@@ -8,46 +8,52 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
+    <div class="halfDiv" style="padding-right: 20px;">
+        <fieldset>
+            <legend>Calendar</legend>
+        </fieldset>
+        <fieldset>
+            <legend></legend>
+        </fieldset>
+    </div>
+    <div class="halfDiv">
+        <fieldset>
+            <legend>Crew Information</legend>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.user_id)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.user_id)
+                @Html.ValidationMessageFor(model => model.user_id)
+            </div>
+                
+            <div class="editor-label">
+                @Html.LabelFor(model => model.comments)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.comments)
+                @Html.ValidationMessageFor(model => model.comments)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ship_id)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ship_id)
+                @Html.ValidationMessageFor(model => model.ship_id)
+            </div>
 
-    <fieldset>
-        <legend>user_entry</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.user_id)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.user_id)
-            @Html.ValidationMessageFor(model => model.user_id)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ship_id)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ship_id)
-            @Html.ValidationMessageFor(model => model.ship_id)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.work_date)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.work_date)
-            @Html.ValidationMessageFor(model => model.work_date)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.comments)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.comments)
-            @Html.ValidationMessageFor(model => model.comments)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.work_date)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.work_date)
+                @Html.ValidationMessageFor(model => model.work_date)
+            </div>
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
+    </div>
 }
 
 <div>

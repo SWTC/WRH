@@ -1,44 +1,58 @@
-﻿@model IEnumerable<STWC_Timesheet.user>
+﻿@model PagedList.IPagedList<STWC_Timesheet.user>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Crew Members List";
 }
 
-<h2>Index</h2>
+<h2>Crew Members List</h2>
+<div style="width:100%; height: 45px;">
+    <div class="leftdiv">@Html.ActionLink("Add New Member", "Create")</div>
+    <div class="rightdiv">
+        @using (Html.BeginForm("Index", "User", FormMethod.Get))
+        {
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)  
+            <input type="submit" value="Search" style="margin-right: 0;" />
+        }
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+<div class="grid">
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.user_name)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.First().rankid).ToHtmlString(), "Index", new { sortOrder = ViewBag.RankIDSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.firstname)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.First().firstname).ToHtmlString(), "Index", new { sortOrder = ViewBag.FirstNameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.lastname)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.First().lastname).ToHtmlString(), "Index", new { sortOrder = ViewBag.LastNameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.email)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.First().email).ToHtmlString(), "Index", new { sortOrder = ViewBag.EmailSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.rankid)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.First().signon_date).ToHtmlString(), "Index", new { sortOrder = ViewBag.Signon_DateSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.signon_date)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.First().signoff_date).ToHtmlString(), "Index", new { sortOrder = ViewBag.Signoff_DateSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.signoff_date)
+            @Html.ActionLink(Html.DisplayNameFor(model => model.First().user_name).ToHtmlString(), "Index", new { sortOrder = ViewBag.UserNameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.user_name)
+@if (Model.ToList().Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+            @Html.DisplayFor(modelItem => item.rankid)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.firstname)
@@ -50,20 +64,35 @@
             @Html.DisplayFor(modelItem => item.email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.rankid)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.signon_date)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.signoff_date)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.user_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.user_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.user_id })
+            @Html.DisplayFor(modelItem => item.user_name)
         </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.user_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.user_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.user_id })
+        </td>
+        </tr>
+    }
+}
+else
+{
+    <tr>
+        <td colspan="9" align="center">No Records found...</td>
     </tr>
 }
 
+
 </table>
+</div>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", 
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+

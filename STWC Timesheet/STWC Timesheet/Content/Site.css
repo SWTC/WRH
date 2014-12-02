@@ -139,7 +139,7 @@ footer {
 
 .site-title a, .site-title a:hover, .site-title a:active {
     background: none;
-    color: #93CCE1;
+    color: #428bca;
     outline: none;
     text-decoration: none;
 }
@@ -159,7 +159,7 @@ footer {
     font-weight: bold;
     text-decoration: none;
     line-height: 2.8em;
-    background-color: #93CCE1;
+    background-color: #428bca;
     color: #ffffff;
     }
 
@@ -455,10 +455,10 @@ textarea {
     input[type="submit"],
     input[type="button"],
     button {
-        background-color: #93CCE1;
+        background-color: #428bca;
         border: 1px solid #787878;
         cursor: pointer;
-        font-size: 1.2em;
+        font-size: 12px;
         font-weight: 600;
         padding: 7px;
         margin-right: 8px;
@@ -765,5 +765,79 @@ tr.pager td {
 .colDiv         { float: left; padding-right: 10px; }
 
 .regsection    { float: left; padding-right: 10px; width: 70%; }
-.usersection    { float: right; width: 25%; background-color: #93CCE1; padding: 10px; margin-right: 10px; }
+.usersection    { float: right; width: 25%; background-color: #428bca; padding: 10px; margin-right: 10px; }
 .usersection input { width: 225px; }
+.leftdiv    { float: left; padding-top: 10px; width: 50%; }
+.rightdiv   { float: right; width: 45%; text-align: right; }
+.leftdiv a { background-color: #428bca;
+border: 1px solid #787878;
+cursor: pointer;
+font-size: 12px;
+font-weight: 600;
+padding: 7px;
+margin-top: 8px;
+width: auto;
+text-decoration: none;
+}
+.halfDiv
+{
+    width: 49%;
+    float: left;
+}
+
+
+/* grid css */
+.grid 
+{
+	margin:0px;padding:0px;
+	width:100%;
+	border:1px solid #333333;
+}
+.grid table{
+    border-collapse: collapse;
+    border-spacing: 0;
+	width:100%;
+	height:100%;
+	margin:0px;padding:0px;
+}
+.grid tr:hover td{
+	
+}
+.grid tr:nth-child(odd){ background-color:#cecdcc; }
+.grid tr:nth-child(even)    { background-color:#ffffff; }
+.grid td{
+	vertical-align:middle;
+	border:1px solid #333333;
+	border-width:0px 1px 1px 0px;
+	text-align:left;
+	padding:7px;
+	font-size:12px;
+	font-family:Arial;
+	font-weight:bold;
+	color:#333333;
+}.grid tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}.grid tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}.grid tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+.grid tr:first-child td{
+	background-color:#666666;
+	border:0px solid #333333;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	font-size:14px;
+	font-family:Arial;
+	font-weight:bold;
+	color:#ffffff;
+}
+.grid tr:first-child:hover td{
+	background-color:#666666;
+}
+.grid tr:first-child td:first-child{
+	border-width:0px 0px 1px 0px;
+}
+.grid tr:first-child td:last-child{
+	border-width:0px 0px 1px 1px;
+}

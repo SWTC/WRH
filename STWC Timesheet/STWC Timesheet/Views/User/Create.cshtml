@@ -1,4 +1,4 @@
-﻿@model STWC_Timesheet.user
+﻿@model STWC_Timesheet.Models.user
 
 @{
     ViewBag.Title = "Create";
@@ -6,72 +6,113 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>user</legend>
+    <section class="regsection">
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.rankid)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.rankid)
+                    @Html.ValidationMessageFor(model => model.rankid)
+                </div>
+            </div>
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.email)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.email)
+                    @Html.ValidationMessageFor(model => model.email)
+                </div>
+            </div>
+        </div>
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.firstname)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.firstname)
+                    @Html.ValidationMessageFor(model => model.firstname)
+                </div>
+            </div>
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.passport_number)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.passport_number)
+                    @Html.ValidationMessageFor(model => model.passport_number)
+                </div>
+            </div>
+        </div>
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.lastname)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.lastname)
+                    @Html.ValidationMessageFor(model => model.lastname)
+                </div>
+            </div>
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.cdc_number)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.cdc_number)
+                    @Html.ValidationMessageFor(model => model.cdc_number)
+                </div>
+            </div>
+        </div>
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.signon_date)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.signon_date)
+                    @Html.ValidationMessageFor(model => model.signon_date)
+                </div>
+            </div>
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.signoff_date)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.signoff_date)
+                    @Html.ValidationMessageFor(model => model.signoff_date)
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="usersection">
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.user_name)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.user_name)
+                    @Html.ValidationMessageFor(model => model.user_name)
+                </div>
+            </div>
+            <div class="colDiv">
+                Use default password for the first time.<br /><br /><br /><br /><br /><br /><br /><br />
+            </div>
+        </div>
+    
+</section>
+<fieldset style="text-align: right;">
+    <input type="submit" value="Create" />
+</fieldset>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.user_name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.user_name)
-            @Html.ValidationMessageFor(model => model.user_name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.firstname)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.firstname)
-            @Html.ValidationMessageFor(model => model.firstname)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.lastname)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.lastname)
-            @Html.ValidationMessageFor(model => model.lastname)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.email)
-            @Html.ValidationMessageFor(model => model.email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.rankid)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.rankid)
-            @Html.ValidationMessageFor(model => model.rankid)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.signon_date)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.signon_date)
-            @Html.ValidationMessageFor(model => model.signon_date)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.signoff_date)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.signoff_date)
-            @Html.ValidationMessageFor(model => model.signoff_date)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
 }
 
 <div>

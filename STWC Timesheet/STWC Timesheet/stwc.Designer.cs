@@ -224,6 +224,30 @@ namespace STWC_Timesheet
         private global::System.String _ship_name;
         partial void Onship_nameChanging(global::System.String value);
         partial void Onship_nameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ship_IMO
+        {
+            get
+            {
+                return _ship_IMO;
+            }
+            set
+            {
+                Onship_IMOChanging(value);
+                ReportPropertyChanging("ship_IMO");
+                _ship_IMO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ship_IMO");
+                Onship_IMOChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ship_IMO;
+        partial void Onship_IMOChanging(Nullable<global::System.Int32> value);
+        partial void Onship_IMOChanged();
 
         #endregion
 
@@ -449,6 +473,78 @@ namespace STWC_Timesheet
         private Nullable<global::System.DateTime> _signoff_date;
         partial void Onsignoff_dateChanging(Nullable<global::System.DateTime> value);
         partial void Onsignoff_dateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                OnpasswordChanging(value);
+                ReportPropertyChanging("password");
+                _password = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("password");
+                OnpasswordChanged();
+            }
+        }
+        private global::System.String _password;
+        partial void OnpasswordChanging(global::System.String value);
+        partial void OnpasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String passport_number
+        {
+            get
+            {
+                return _passport_number;
+            }
+            set
+            {
+                Onpassport_numberChanging(value);
+                ReportPropertyChanging("passport_number");
+                _passport_number = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("passport_number");
+                Onpassport_numberChanged();
+            }
+        }
+        private global::System.String _passport_number;
+        partial void Onpassport_numberChanging(global::System.String value);
+        partial void Onpassport_numberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String cdc_number
+        {
+            get
+            {
+                return _cdc_number;
+            }
+            set
+            {
+                Oncdc_numberChanging(value);
+                ReportPropertyChanging("cdc_number");
+                _cdc_number = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("cdc_number");
+                Oncdc_numberChanged();
+            }
+        }
+        private global::System.String _cdc_number;
+        partial void Oncdc_numberChanging(global::System.String value);
+        partial void Oncdc_numberChanged();
 
         #endregion
 
