@@ -9,7 +9,16 @@ using System.Web.Security;
 
 namespace STWC_Timesheet.Models
 {
-    public class InputModel
+    public class InputModels
+    {
+        public user UserModel { get; set; }
+        public user_entry UserEntryModel { get; set; }
+    }
+}
+
+namespace STWC_Timesheet
+{
+    public class Inputs
     {
         [Required]
         [Display(Name = "Crew Member")]
@@ -33,7 +42,13 @@ namespace STWC_Timesheet.Models
         public string NonConformities { get; set; }
     }
 
+    [MetadataType(typeof(UserHelper))]
     public partial class user
+    {
+        
+    }
+
+    public class UserHelper
     {
         [Display(Name = "Rank")]
         [Required(ErrorMessage = "Rank is required")]
@@ -41,7 +56,7 @@ namespace STWC_Timesheet.Models
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email is required")]
-        [RegularExpression(@"^(?:\d[ -]*?){13,16}$", ErrorMessage = "Invalid format")]
+        [RegularExpression(@"(\w[-._\w]*\w@\w[-._\w]*\w\.\w[\w]*\w)", ErrorMessage = "Invalid email format")]
         public string email;
 
         [Display(Name = "First Name")]
@@ -70,6 +85,21 @@ namespace STWC_Timesheet.Models
         [Display(Name = "Username")]
         [Required(ErrorMessage = "Username is required")]
         public string user_name;
+    }
 
+    [MetadataType(typeof(UserEntryHelper))]
+    public partial class user_entry
+    {
+
+    }
+
+    public class UserEntryHelper
+    {
+        [Display(Name = "Full Name")]
+        [Required(ErrorMessage = "Select crew member")]
+        public string user_id;
+
+        [Display(Name = "Comments")]
+        public string comments;
     }
 }

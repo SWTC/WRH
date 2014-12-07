@@ -1,58 +1,144 @@
-﻿@model STWC_Timesheet.user_entry
-
+﻿@model STWC_Timesheet.Models.InputModels
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Working Hours";
 }
 
-<h2>Create</h2>
+<h2>Working Hours</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-    <div class="halfDiv" style="padding-right: 20px;">
-        <fieldset>
-            <legend>Calendar</legend>
-        </fieldset>
-        <fieldset>
-            <legend></legend>
-        </fieldset>
+    <div class="halfDiv" style="width: 40%;">
+        <div class="calendar" style="margin-top: 10px;"></div>
+        <div style="margin: 10px 0 10px 0;">
+            <span class="normal"></span> Normal
+            <span class="occured"></span> Occured N/C
+            <span class="altered"></span> Altered
+        </div>
     </div>
-    <div class="halfDiv">
+    <div class="halfDiv"  style="width: 60%;">
         <fieldset>
             <legend>Crew Information</legend>
             <div class="editor-label">
-                @Html.LabelFor(model => model.user_id)
+                @Html.LabelFor(model => model.UserEntryModel.user_id)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.user_id)
-                @Html.ValidationMessageFor(model => model.user_id)
+                @Html.EditorFor(model => model.UserEntryModel.user_id)
+                @Html.ValidationMessageFor(model => model.UserEntryModel.user_id)
             </div>
                 
             <div class="editor-label">
-                @Html.LabelFor(model => model.comments)
+                @Html.LabelFor(model => model.UserEntryModel.comments)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.comments)
-                @Html.ValidationMessageFor(model => model.comments)
+                @Html.TextAreaFor(model => model.UserEntryModel.comments)
+                @Html.ValidationMessageFor(model => model.UserEntryModel.comments)
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ship_id)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ship_id)
-                @Html.ValidationMessageFor(model => model.ship_id)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.work_date)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.work_date)
-                @Html.ValidationMessageFor(model => model.work_date)
-            </div>
-            <p>
-                <input type="submit" value="Save" />
-            </p>
         </fieldset>
+        <fieldset style="text-align: right;">
+            <input type="submit" value="Save" />
+        </fieldset>
+    </div>
+    <div style="float: left;">
+        <ol id="numbersol">
+            <li>0</li>
+            <li></li>
+            <li>1</li>
+            <li></li>
+            <li>2</li>
+            <li></li>
+            <li>3</li>
+            <li></li>
+            <li>4</li>
+            <li></li>
+            <li>5</li>
+            <li></li>
+            <li>6</li>
+            <li></li>
+            <li>7</li>
+            <li></li>
+            <li>8</li>
+            <li></li>
+            <li>9</li>
+            <li></li>
+            <li>10</li>
+            <li></li>
+            <li>11</li>
+            <li></li>
+            <li>12</li>
+            <li></li>
+            <li>13</li>
+            <li></li>
+            <li>14</li>
+            <li></li>
+            <li>15</li>
+            <li></li>
+            <li>16</li>
+            <li></li>
+            <li>17</li>
+            <li></li>
+            <li>18</li>
+            <li></li>
+            <li>19</li>
+            <li></li>
+            <li>20</li>
+            <li></li>
+            <li>21</li>
+            <li></li>
+            <li>22</li>
+            <li></li>
+            <li>23</li>
+            <li></li>
+        </ol>
+        <ol id="selectable">
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+        </ol>
     </div>
 }
 
@@ -62,4 +148,11 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.calendar').datepicker();
+            $("#selectable").selectable();
+        });
+    </script>
 }

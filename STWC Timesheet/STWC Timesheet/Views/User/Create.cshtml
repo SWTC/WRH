@@ -1,4 +1,4 @@
-﻿@model STWC_Timesheet.Models.user
+﻿@model STWC_Timesheet.Models.InputModels
 
 @{
     ViewBag.Title = "Create";
@@ -14,80 +14,80 @@
         <div class="rowDiv">
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.rankid)
+                    @Html.LabelFor(model => model.UserModel.rankid)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.rankid)
-                    @Html.ValidationMessageFor(model => model.rankid)
+                    @Html.EditorFor(model => model.UserModel.rankid)
+                    @Html.ValidationMessageFor(model => model.UserModel.rankid)
                 </div>
             </div>
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.email)
+                    @Html.LabelFor(model => model.UserModel.email)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.email)
-                    @Html.ValidationMessageFor(model => model.email)
-                </div>
-            </div>
-        </div>
-        <div class="rowDiv">
-            <div class="colDiv">
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.firstname)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.firstname)
-                    @Html.ValidationMessageFor(model => model.firstname)
-                </div>
-            </div>
-            <div class="colDiv">
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.passport_number)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.passport_number)
-                    @Html.ValidationMessageFor(model => model.passport_number)
+                    @Html.EditorFor(model => model.UserModel.email)
+                    @Html.ValidationMessageFor(model => model.UserModel.email)
                 </div>
             </div>
         </div>
         <div class="rowDiv">
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.lastname)
+                    @Html.LabelFor(model => model.UserModel.firstname)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.lastname)
-                    @Html.ValidationMessageFor(model => model.lastname)
+                    @Html.EditorFor(model => model.UserModel.firstname)
+                    @Html.ValidationMessageFor(model => model.UserModel.firstname)
                 </div>
             </div>
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.cdc_number)
+                    @Html.LabelFor(model => model.UserModel.passport_number)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.cdc_number)
-                    @Html.ValidationMessageFor(model => model.cdc_number)
+                    @Html.EditorFor(model => model.UserModel.passport_number)
+                    @Html.ValidationMessageFor(model => model.UserModel.passport_number)
                 </div>
             </div>
         </div>
         <div class="rowDiv">
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.signon_date)
+                    @Html.LabelFor(model => model.UserModel.lastname)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.signon_date)
-                    @Html.ValidationMessageFor(model => model.signon_date)
+                    @Html.EditorFor(model => model.UserModel.lastname)
+                    @Html.ValidationMessageFor(model => model.UserModel.lastname)
                 </div>
             </div>
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.signoff_date)
+                    @Html.LabelFor(model => model.UserModel.cdc_number)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.signoff_date)
-                    @Html.ValidationMessageFor(model => model.signoff_date)
+                    @Html.EditorFor(model => model.UserModel.cdc_number)
+                    @Html.ValidationMessageFor(model => model.UserModel.cdc_number)
+                </div>
+            </div>
+        </div>
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.UserModel.signon_date)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.UserModel.signon_date)
+                    @Html.ValidationMessageFor(model => model.UserModel.signon_date)
+                </div>
+            </div>
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.UserModel.signoff_date)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.UserModel.signoff_date)
+                    @Html.ValidationMessageFor(model => model.UserModel.signoff_date)
                 </div>
             </div>
         </div>
@@ -96,11 +96,11 @@
         <div class="rowDiv">
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.user_name)
+                    @Html.LabelFor(model => model.UserModel.user_name)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.user_name)
-                    @Html.ValidationMessageFor(model => model.user_name)
+                    @Html.EditorFor(model => model.UserModel.user_name)
+                    @Html.ValidationMessageFor(model => model.UserModel.user_name)
                 </div>
             </div>
             <div class="colDiv">
@@ -121,4 +121,16 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '2014:2050',
+                showButtonPanel: true,
+                dateFormat: 'mm/dd/yy'
+            });
+        });
+    </script>
 }

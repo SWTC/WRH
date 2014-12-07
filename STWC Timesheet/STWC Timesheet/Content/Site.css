@@ -59,7 +59,7 @@ mark {
 
 h1, h2, h3,
 h4, h5, h6 {
-    color: #000;
+    color: #666666;
     margin-bottom: 0;
     padding-bottom: 0;
 }
@@ -69,7 +69,8 @@ h1 {
 }
 
 h2 {
-    font-size: 1.75em;
+    font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
+    font-size: 24px;
 }
 
 h3 {
@@ -841,3 +842,17 @@ text-decoration: none;
 .grid tr:first-child td:last-child{
 	border-width:0px 0px 1px 1px;
 }
+
+#numbersol { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#numbersol li { height: 16px; width: 16px; float: left; border: solid 1px #EFEEEF;} 
+#numbersol li:nth-child(odd) { border-left: solid 2px #EFEEEF; }
+ 
+#selectable .ui-selecting { background: #666666; }
+#selectable .ui-selected { background: #428bca; color: white; }
+#selectable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#selectable li { height: 16px; width: 16px; float: left; }
+#selectable li:nth-child(odd) { border-left: solid 2px #666666; }
+
+.normal { padding: 0 10px 0 5px;  margin: 3px; border: solid 1px #666666; background-color: #DBDBDB; }
+.occured { padding: 0 10px 0 5px; margin: 3px; border: solid 1px #666666; background-color: #FF0000; }
+.altered { padding: 0 10px 0 5px; margin: 3px; border: solid 1px #666666; background-color: #428bca; }
