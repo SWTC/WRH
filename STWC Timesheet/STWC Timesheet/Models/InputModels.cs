@@ -13,6 +13,7 @@ namespace STWC_Timesheet.Models
     {
         public user UserModel { get; set; }
         public user_entry UserEntryModel { get; set; }
+        public ship ShipModel { get; set; }
     }
 }
 
@@ -102,4 +103,35 @@ namespace STWC_Timesheet
         [Display(Name = "Comments")]
         public string comments;
     }
+
+    [MetadataType(typeof(ShipHelper))]
+    public partial class ship
+    {
+        public string comp_name
+        {
+            get { return System.Environment.MachineName; }
+            set { comp_name = System.Environment.MachineName; }
+        }
+    }
+
+    public class ShipHelper
+    {
+        [Display(Name = "Ship Name")]
+        [Required(ErrorMessage = "Ship name is required")]
+        public string ship_name;
+
+        [Display(Name = "IMO")]
+        [Required(ErrorMessage = "IMO is required")]
+        public string ship_IMO;
+
+        [Display(Name = "Serial No.")]
+        public string serial_number;
+
+        [Display(Name = "licence key")]
+        public string licence_key;
+
+        [Display(Name = "Computer Name")]
+        public string comp_name;
+    }
+
 }

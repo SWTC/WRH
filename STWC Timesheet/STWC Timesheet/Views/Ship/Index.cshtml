@@ -1,26 +1,35 @@
 ﻿@model IEnumerable<STWC_Timesheet.ship>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Registered Ship";
 }
 
-<h2>Index</h2>
+<h2>Registered Ship</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    
 </p>
+<div style="width:100%; height: 45px;">
+    <div class="leftdiv">@Html.ActionLink("Create New", "Create")</div>
+</div>
+<div class="grid">
 <table>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ship_name)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.ship_IMO)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.ship_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ship_IMO)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ship_id }) |
@@ -31,3 +40,4 @@
 }
 
 </table>
+</div>

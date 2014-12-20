@@ -1,31 +1,95 @@
-﻿@model STWC_Timesheet.ship
+﻿@model STWC_Timesheet.Models.InputModels
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Register Ship";
 }
 
-<h2>Create</h2>
+<h2>Register Ship</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>ship</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ship_name)
+    <section class="regsection">
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ShipModel.ship_name)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ShipModel.ship_name)
+                    @Html.ValidationMessageFor(model => model.ShipModel.ship_name)
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ship_name)
-            @Html.ValidationMessageFor(model => model.ship_name)
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ShipModel.ship_IMO)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ShipModel.ship_IMO)
+                    @Html.ValidationMessageFor(model => model.ShipModel.ship_IMO)
+                </div>
+            </div>
         </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ShipModel.serial_number)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ShipModel.serial_number)
+                    @Html.ValidationMessageFor(model => model.ShipModel.serial_number)
+                </div>
+            </div>
+        </div>
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-field" style="padding-top:35px;">
+                    @Html.ActionLink("Copy to clipboard", "Index")
+                    @Html.ActionLink("Email to us", "Index")
+                </div>
+            </div>
+        </div>
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ShipModel.licence_key)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.ShipModel.licence_key, new { style = "width:450px;" })
+                    @Html.ValidationMessageFor(model => model.ShipModel.licence_key)
+                </div>
+            </div>
+        </div>
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-field" style="padding-top:23px;">
+                    <input type="button" value="Validate" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="usersection">
+        <div class="rowDiv">
+            <div class="colDiv">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ShipModel.comp_name)
+                </div>
+                <div class="editor-field">
+                    @Html.DisplayFor(model => model.ShipModel.comp_name)
+                </div>
+            </div>
+            <div class="colDiv">
+                <br /><br /><br /><br /><br /><br /><br /><br />
+            </div>
+        </div>
+    </section>
+    <fieldset style="text-align: right;">
+        <input type="submit" value="Register" />
     </fieldset>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

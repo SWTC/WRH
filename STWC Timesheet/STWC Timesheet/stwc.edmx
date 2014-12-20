@@ -17,6 +17,8 @@
           <Property Name="ship_id" Type="int" Nullable="false" />
           <Property Name="ship_name" Type="varchar" MaxLength="100" />
           <Property Name="ship_IMO" Type="int" />
+          <Property Name="serial_number" Type="int" />
+          <Property Name="licence_key" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="user_entry">
           <Key>
@@ -60,6 +62,8 @@
           <Property Name="ship_id" Type="Int32" Nullable="false" />
           <Property Name="ship_name" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Type="Int32" Name="ship_IMO" />
+          <Property Type="Int32" Name="serial_number" />
+          <Property Type="String" Name="licence_key" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="user_entry">
           <Key>
@@ -96,6 +100,8 @@
           <EntitySetMapping Name="ships">
             <EntityTypeMapping TypeName="stwcModel.ship">
               <MappingFragment StoreEntitySet="ships">
+                <ScalarProperty Name="licence_key" ColumnName="licence_key" />
+                <ScalarProperty Name="serial_number" ColumnName="serial_number" />
                 <ScalarProperty Name="ship_IMO" ColumnName="ship_IMO" />
                 <ScalarProperty Name="ship_id" ColumnName="ship_id" />
                 <ScalarProperty Name="ship_name" ColumnName="ship_name" />

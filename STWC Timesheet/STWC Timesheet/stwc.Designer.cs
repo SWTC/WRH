@@ -248,6 +248,54 @@ namespace STWC_Timesheet
         private Nullable<global::System.Int32> _ship_IMO;
         partial void Onship_IMOChanging(Nullable<global::System.Int32> value);
         partial void Onship_IMOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> serial_number
+        {
+            get
+            {
+                return _serial_number;
+            }
+            set
+            {
+                Onserial_numberChanging(value);
+                ReportPropertyChanging("serial_number");
+                _serial_number = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("serial_number");
+                Onserial_numberChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _serial_number;
+        partial void Onserial_numberChanging(Nullable<global::System.Int32> value);
+        partial void Onserial_numberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String licence_key
+        {
+            get
+            {
+                return _licence_key;
+            }
+            set
+            {
+                Onlicence_keyChanging(value);
+                ReportPropertyChanging("licence_key");
+                _licence_key = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("licence_key");
+                Onlicence_keyChanged();
+            }
+        }
+        private global::System.String _licence_key;
+        partial void Onlicence_keyChanging(global::System.String value);
+        partial void Onlicence_keyChanged();
 
         #endregion
 
