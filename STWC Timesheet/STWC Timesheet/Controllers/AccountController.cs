@@ -14,9 +14,10 @@ using STWC_Timesheet.Models;
 namespace STWC_Timesheet.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private stwcEntities db = new stwcEntities();
+
         //
         // GET: /Account/Login
 
@@ -35,9 +36,14 @@ namespace STWC_Timesheet.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid)
             {
-                return RedirectToLocal(returnUrl);
+                var loggedInUser = db.users.SingleOrDefault(u => u.user_name == model.UserName && u.password == model.Password);
+                if (loggedInUser != null)
+                {
+                    FormsAuthentication.SetAuthCookie(model.Password, true);
+                    return RedirectToLocal(returnUrl);
+                }
             }
 
             // If we got this far, something failed, redisplay form
@@ -52,9 +58,10 @@ namespace STWC_Timesheet.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            WebSecurity.Logout();
+            FormsAuthentication.SignOut();
+            Session.Abandon();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //

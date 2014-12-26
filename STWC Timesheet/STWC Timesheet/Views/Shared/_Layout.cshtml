@@ -15,9 +15,16 @@
                     <p class="site-title">@Html.ActionLink("STCW", "Login", "Account")</p>
                 </div>
                 <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
+                    @if (Request.IsAuthenticated) {
+                    <text>
+                        Hello, @User.Identity.Name !
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                        }
+                    </text>
+                }
                 </div>
             </div>
         </header>
