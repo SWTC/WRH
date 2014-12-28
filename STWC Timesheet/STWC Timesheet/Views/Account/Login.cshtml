@@ -8,6 +8,7 @@
     <h1>@ViewBag.Title</h1>
 </hgroup>
 
+
 <section id="loginForm">
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
@@ -36,8 +37,11 @@
 </section>
 
 <section class="social" id="socialLoginForm">
-    <h2>Dummy text</h2>
-    
+    <p>The <b>International Convention on Standards of Training, Certification and Watchkeeping for Seafarers</b> (or <b>STCW</b>), 
+    1978 sets qualification standards for masters, officers and watch personnel on seagoing merchant ships. 
+    STCW was adopted in 1978 by conference at the International Maritime Organization (IMO) in London, 
+    and entered into force in 1984. The Convention was significantly amended in 1995.</p>
+    <p>Check compliance with STCW 2010, ILO MLC, US OPA 90 and OCIMF recommendations</p>
 </section>
 
 @section Scripts {

@@ -53,7 +53,7 @@ namespace STWC_Timesheet
     {
         [Display(Name = "Rank")]
         [Required(ErrorMessage = "Rank is required")]
-        public string rankid;
+        public string rank_id;
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email is required")]
@@ -72,8 +72,8 @@ namespace STWC_Timesheet
         [Required(ErrorMessage = "Passport number is required")]
         public string passport_number;
 
-        [Display(Name = "CNC Number")]
-        [Required(ErrorMessage = "CNC number is required")]
+        [Display(Name = "CDC Number")]
+        [Required(ErrorMessage = "CDC number is required")]
         public string cdc_number;
 
         [Display(Name = "Sign on Date")]
@@ -86,6 +86,17 @@ namespace STWC_Timesheet
         [Display(Name = "Username")]
         [Required(ErrorMessage = "Username is required")]
         public string user_name;
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "New password")]
+        public string password;
+
+        [Display(Name = "Confirm new password")]
+        [DataType(DataType.Password)]
+        [Compare("password", ErrorMessage = "The new password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
     }
 
     [MetadataType(typeof(UserEntryHelper))]

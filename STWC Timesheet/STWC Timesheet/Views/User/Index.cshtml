@@ -23,7 +23,7 @@
 <table>
     <tr>
         <th>
-            @Html.ActionLink(Html.DisplayNameFor(model => model.First().rankid).ToHtmlString(), "Index", new { sortOrder = ViewBag.RankIDSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(Html.DisplayNameFor(model => model.First().rank_id).ToHtmlString(), "Index", new { sortOrder = ViewBag.rank_idSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             @Html.ActionLink(Html.DisplayNameFor(model => model.First().firstname).ToHtmlString(), "Index", new { sortOrder = ViewBag.FirstNameSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -52,7 +52,7 @@
     {
         <tr>
             <td>
-            @Html.DisplayFor(modelItem => item.rankid)
+            @Html.DisplayFor(modelItem => item.rank.rank_name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.firstname)

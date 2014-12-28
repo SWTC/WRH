@@ -43,6 +43,7 @@ mark {
 
 .float-left {
     float: left;
+    padding-bottom: 10px;
 }
 
 .float-right {
@@ -117,7 +118,7 @@ h5, h6 {
     }
 
 header .content-wrapper {
-    padding-top: 20px; 
+    padding-top: 10px; 
 }
 
 footer {
@@ -151,7 +152,7 @@ footer {
 #login {
     display: block;
     font-size: 12px;
-    margin: 0 0 10px;
+    margin: -28px 10px 0 0;
     text-align: right;
 }
 
@@ -428,7 +429,7 @@ label.checkbox {
     display: inline;
 }
 
-input, textarea {
+input, textarea, select {
     border: 1px solid #e2e2e2;
     background: #fff;
     color: #333;
@@ -442,6 +443,8 @@ textarea {
     font-family: inherit;
     width: 500px;
 }
+
+select { height: 31px; width: 260px; }
 
     input:focus, textarea:focus {
         border: 1px solid #7ac0da;
@@ -609,52 +612,9 @@ tr.pager td {
         text-align: center;
     }
 
-    /* login */
-    #login {
-        font-size: .85em;
-        margin: 0 0 12px;
-        text-align: center;
-    }
+    
 
-        #login ul {
-            margin: 5px 0;
-            padding: 0;
-        }
-
-        #login li {
-            display: inline;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        #login a {
-            background: none;
-            color: #999;
-            font-weight: 600;
-            margin: 2px;
-            padding: 0;
-        }
-
-        #login a:hover {
-            color: #333;
-        }
-
-    /* menu */
-    nav {
-        margin-bottom: 5px;
-    }
-
-    ul#menu {
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-
-        ul#menu li {
-            margin: 0;
-            padding: 0;
-        }
+    
 
 
     /* main layout

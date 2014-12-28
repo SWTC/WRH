@@ -18,6 +18,8 @@ namespace STWC_Timesheet.Controllers
         //
         // GET: /User/
 
+
+        [Authorize]
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             var users = GetFormattedData(searchString, currentFilter, sortOrder, page);
@@ -46,6 +48,7 @@ namespace STWC_Timesheet.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.Rank_Type = new SelectList(db.ranks, "rank_id", "rank_name");
             return View();
         }
 
@@ -55,6 +58,7 @@ namespace STWC_Timesheet.Controllers
         [HttpPost]
         public ActionResult Create(user user)
         {
+            ViewBag.Rank_Type = new SelectList(db.ranks, "rank_id", "rank_name");
             if (ModelState.IsValid)
             {
                 db.users.AddObject(user);
@@ -70,6 +74,11 @@ namespace STWC_Timesheet.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            var selected = (from sel in db.users
+                               where sel.user_id == id
+                               select sel.rank_id).FirstOrDefault();
+            ViewBag.Rank_Type = new SelectList(db.ranks, "rank_id", "rank_name", selected);
+
             user user = db.users.Single(u => u.user_id == id);
             if (user == null)
             {
@@ -141,7 +150,7 @@ namespace STWC_Timesheet.Controllers
             ViewBag.CurrentFilter = searchString;
 
             ViewBag.UserIDSortParm = String.IsNullOrEmpty(sortOrder) ? "UI_desc" : "";
-            ViewBag.RankIDSortParm = sortOrder == "RI_desc" ? "RI_desc" : "RI_asc";
+            ViewBag.rank_idSortParm = sortOrder == "RI_desc" ? "RI_desc" : "RI_asc";
             ViewBag.FirstNameSortParm = sortOrder == "FN_desc" ? "FN_desc" : "FN_asc";
             ViewBag.LastNameSortParm = sortOrder == "LN_desc" ? "LN_desc" : "LN_asc";
             ViewBag.EmailSortParm = sortOrder == "Email_desc" ? "Email_desc" : "Email_asc";
@@ -166,11 +175,11 @@ namespace STWC_Timesheet.Controllers
                     users = users.OrderByDescending(s => s.user_id);
                     break;
                 case "RI_desc":
-                    users = users.OrderByDescending(s => s.rankid);
+                    users = users.OrderByDescending(s => s.rank_id);
                     ViewBag.LoanOfficerSortParm = "RI_asc";
                     break;
                 case "RI_asc":
-                    users = users.OrderBy(s => s.rankid);
+                    users = users.OrderBy(s => s.rank_id);
                     ViewBag.LoanOfficerSortParm = "RI_desc";
                     break;
                 case "FN_desc":

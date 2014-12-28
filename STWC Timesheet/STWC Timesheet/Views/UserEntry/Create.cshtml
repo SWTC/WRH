@@ -22,7 +22,7 @@
                 @Html.LabelFor(model => model.UserEntryModel.user_id)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.UserEntryModel.user_id)
+                @Html.DropDownListFor(model => model.UserEntryModel.user_id, (SelectList)ViewBag.Users_list, "Please Select")
                 @Html.ValidationMessageFor(model => model.UserEntryModel.user_id)
             </div>
                 
@@ -139,6 +139,7 @@
           <li class="ui-widget-content"></li>
           <li class="ui-widget-content"></li>
         </ol>
+        <span>Worked Hours:</span> <span id="select-result">none</span>
     </div>
 }
 
@@ -152,7 +153,44 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.calendar').datepicker();
-            $("#selectable").selectable();
+            $("#selectable").selectable({
+                selecting: function (event, ui) {
+                    if (event.detail == 0) {
+                        _selectRange = true;
+                        return true;
+                    }
+                    if ($(ui.selecting).hasClass('ui-selected')) {
+                        _deselectQueue.push(ui.selecting);
+                    }
+                },
+                unselecting: function (event, ui) {
+                    $(ui.unselecting).addClass('ui-selected');
+                },
+                stop: function () {
+                    if (!_selectRange) {
+                        $.each(_deselectQueue, function (ix, de) {
+                            $(de)
+                        .removeClass('ui-selecting')
+                        .removeClass('ui-selected');
+                        });
+                    }
+                    _selectRange = false;
+                    _deselectQueue = [];
+                }
+            });
+
+            $("#selectable").selectable({
+                stop: function () {
+                    var result = $("#select-result").empty();
+                    var count = 0;
+                    $(".ui-selected", this).each(function () {
+                        var index = $("#selectable li").index(this);
+                        result.append(" #" + index);
+                        count = count + 1;
+                    });
+                    result.append(" = " + count / 2);
+                }
+            });
         });
     </script>
 }

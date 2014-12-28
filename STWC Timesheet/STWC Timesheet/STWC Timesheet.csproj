@@ -358,16 +358,7 @@
     <Content Include="Views\UserEntry\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_LoginLayout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\User\_ViewStart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\_MenuPartial.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UserEntry\_ViewStart.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

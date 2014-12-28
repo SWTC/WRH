@@ -6,10 +6,30 @@
     <edmx:StorageModels>
     <Schema Namespace="stwcModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="stwcModelStoreContainer">
+          <EntitySet Name="rank" EntityType="stwcModel.Store.rank" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ships" EntityType="stwcModel.Store.ships" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="user_entry" EntityType="stwcModel.Store.user_entry" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="users" EntityType="stwcModel.Store.users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ships_users" Association="stwcModel.Store.FK_ships_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="ships" EntitySet="ships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_entry_users" Association="stwcModel.Store.FK_user_entry_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="user_entry" EntitySet="user_entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_rank" Association="stwcModel.Store.FK_users_rank">
+            <End Role="rank" EntitySet="rank" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="rank">
+          <Key>
+            <PropertyRef Name="rank_id" />
+          </Key>
+          <Property Name="rank_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="rank_name" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ships">
           <Key>
             <PropertyRef Name="ship_id" />
@@ -26,7 +46,6 @@
           </Key>
           <Property Name="entry_id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" />
-          <Property Name="ship_id" Type="int" />
           <Property Name="work_date" Type="date" />
           <Property Name="comments" Type="text" />
         </EntityType>
@@ -34,26 +53,55 @@
           <Key>
             <PropertyRef Name="user_id" />
           </Key>
-          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="user_name" Type="varchar" MaxLength="50" />
           <Property Name="firstname" Type="varchar" MaxLength="100" />
           <Property Name="lastname" Type="varchar" MaxLength="100" />
           <Property Name="email" Type="varchar" MaxLength="100" />
-          <Property Name="rankid" Type="int" />
-          <Property Name="signon_date" Type="datetime" />
-          <Property Name="signoff_date" Type="datetime" />
+          <Property Name="rank_id" Type="int" />
+          <Property Name="signon_date" Type="date" />
+          <Property Name="signoff_date" Type="date" />
           <Property Name="password" Type="varchar" MaxLength="50" />
           <Property Name="passport_number" Type="varchar" MaxLength="50" />
           <Property Name="cdc_number" Type="varchar" MaxLength="50" />
+          <Property Name="ship_id" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6013: The table/view 'stwc.dbo.user_entry_hours' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-      
-      <EntityType Name="user_entry_hours">
-        <Property Name="entry_id" Type="int" />
-        <Property Name="start_time" Type="time" />
-        <Property Name="end_time" Type="time" />
-      </EntityType>-->
+        <Association Name="FK_ships_users">
+          <End Role="users" Type="stwcModel.Store.users" Multiplicity="1" />
+          <End Role="ships" Type="stwcModel.Store.ships" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="ships">
+              <PropertyRef Name="ship_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_entry_users">
+          <End Role="users" Type="stwcModel.Store.users" Multiplicity="0..1" />
+          <End Role="user_entry" Type="stwcModel.Store.user_entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_entry">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_rank">
+          <End Role="rank" Type="stwcModel.Store.rank" Multiplicity="0..1" />
+          <End Role="users" Type="stwcModel.Store.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rank">
+              <PropertyRef Name="rank_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="rank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -62,6 +110,19 @@
           <EntitySet Name="ships" EntityType="stwcModel.ship" />
           <EntitySet Name="user_entry" EntityType="stwcModel.user_entry" />
           <EntitySet Name="users" EntityType="stwcModel.user" />
+          <AssociationSet Name="FK_ships_users" Association="stwcModel.FK_ships_users">
+            <End Role="user" EntitySet="users" />
+            <End Role="ship" EntitySet="ships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_entry_users" Association="stwcModel.FK_user_entry_users">
+            <End Role="user" EntitySet="users" />
+            <End Role="user_entry" EntitySet="user_entry" />
+          </AssociationSet>
+          <EntitySet Name="ranks" EntityType="stwcModel.rank" />
+          <AssociationSet Name="FK_users_rank" Association="stwcModel.FK_users_rank">
+            <End Role="rank" EntitySet="ranks" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ship">
           <Key>
@@ -72,6 +133,7 @@
           <Property Type="Int32" Name="ship_IMO" />
           <Property Type="Int32" Name="serial_number" />
           <Property Type="String" Name="licence_key" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user" Relationship="stwcModel.FK_ships_users" FromRole="ship" ToRole="user" />
         </EntityType>
         <EntityType Name="user_entry">
           <Key>
@@ -79,9 +141,9 @@
           </Key>
           <Property Type="Int32" Name="entry_id" Nullable="false" />
           <Property Type="Int32" Name="user_id" />
-          <Property Type="Int32" Name="ship_id" />
           <Property Type="DateTime" Name="work_date" />
           <Property Type="String" Name="comments" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user" Relationship="stwcModel.FK_user_entry_users" FromRole="user_entry" ToRole="user" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -92,13 +154,61 @@
           <Property Type="String" Name="firstname" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="lastname" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="email" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="rankid" />
           <Property Type="DateTime" Name="signon_date" />
           <Property Type="DateTime" Name="signoff_date" />
           <Property Type="String" Name="password" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="passport_number" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="cdc_number" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="rank_id" />
+          <Property Type="Int32" Name="ship_id" />
+          <NavigationProperty Name="ship" Relationship="stwcModel.FK_ships_users" FromRole="user" ToRole="ship" />
+          <NavigationProperty Name="user_entry" Relationship="stwcModel.FK_user_entry_users" FromRole="user" ToRole="user_entry" />
+          <NavigationProperty Name="rank" Relationship="stwcModel.FK_users_rank" FromRole="user" ToRole="rank" />
         </EntityType>
+        <Association Name="FK_ships_users">
+          <End Type="stwcModel.user" Role="user" Multiplicity="1" />
+          <End Type="stwcModel.ship" Role="ship" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="ship">
+              <PropertyRef Name="ship_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_entry_users">
+          <End Type="stwcModel.user" Role="user" Multiplicity="0..1" />
+          <End Type="stwcModel.user_entry" Role="user_entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_entry">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="rank">
+          <Key>
+            <PropertyRef Name="rank_id" />
+          </Key>
+          <Property Type="Int32" Name="rank_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="rank_name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="users" Relationship="stwcModel.FK_users_rank" FromRole="rank" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_users_rank">
+          <End Type="stwcModel.rank" Role="rank" Multiplicity="0..1" />
+          <End Type="stwcModel.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rank">
+              <PropertyRef Name="rank_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="rank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -121,7 +231,6 @@
               <MappingFragment StoreEntitySet="user_entry">
                 <ScalarProperty Name="comments" ColumnName="comments" />
                 <ScalarProperty Name="work_date" ColumnName="work_date" />
-                <ScalarProperty Name="ship_id" ColumnName="ship_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="entry_id" ColumnName="entry_id" />
               </MappingFragment>
@@ -130,17 +239,26 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="stwcModel.user">
               <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="ship_id" ColumnName="ship_id" />
+                <ScalarProperty Name="rank_id" ColumnName="rank_id" />
                 <ScalarProperty Name="cdc_number" ColumnName="cdc_number" />
                 <ScalarProperty Name="passport_number" ColumnName="passport_number" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="signoff_date" ColumnName="signoff_date" />
                 <ScalarProperty Name="signon_date" ColumnName="signon_date" />
-                <ScalarProperty Name="rankid" ColumnName="rankid" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
                 <ScalarProperty Name="firstname" ColumnName="firstname" />
                 <ScalarProperty Name="user_name" ColumnName="user_name" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ranks">
+            <EntityTypeMapping TypeName="stwcModel.rank">
+              <MappingFragment StoreEntitySet="rank">
+                <ScalarProperty Name="rank_name" ColumnName="rank_name" />
+                <ScalarProperty Name="rank_id" ColumnName="rank_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -166,8 +284,22 @@
     <Diagrams>
       <Diagram Name="stwc">
         <EntityTypeShape EntityType="stwcModel.ship" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333335" />
-        <EntityTypeShape EntityType="stwcModel.user_entry" Width="1.5" PointX="2.75" PointY="0.75" Height="1.9802864583333317" />
-        <EntityTypeShape EntityType="stwcModel.user" Width="1.5" PointX="0.75" PointY="3.75" Height="3.1340950520833322" />
+        <EntityTypeShape EntityType="stwcModel.user_entry" Width="1.5" PointX="2.75" PointY="0.75" Height="1.9802864583333339" />
+        <EntityTypeShape EntityType="stwcModel.user" Width="1.5" PointX="5.75" PointY="1.125" Height="3.1340950520833326" />
+        <AssociationConnector Association="stwcModel.FK_ships_users" >
+          <ConnectorPoint PointX="5.75" PointY="3.5550444453125" />
+          <ConnectorPoint PointX="1.5" PointY="3.5550444453125" />
+          <ConnectorPoint PointX="1.5" PointY="2.922587890625" />
+        </AssociationConnector>
+        <AssociationConnector Association="stwcModel.FK_user_entry_users" >
+          <ConnectorPoint PointX="5.75" PointY="1.9276432291666672" />
+          <ConnectorPoint PointX="4.25" PointY="1.9276432291666672" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="stwcModel.rank" Width="1.5" PointX="8.125" PointY="1.25" Height="1.5956835937499996" />
+        <AssociationConnector Association="stwcModel.FK_users_rank" >
+          <ConnectorPoint PointX="8.125" PointY="2.047841796875" />
+          <ConnectorPoint PointX="7.25" PointY="2.047841796875" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>

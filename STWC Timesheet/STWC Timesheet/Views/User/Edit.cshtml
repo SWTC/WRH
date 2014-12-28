@@ -9,15 +9,18 @@
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.user_id)
+    @Html.HiddenFor(model => model.password)
     <section class="regsection">
         <div class="rowDiv">
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.rankid)
+                    @Html.LabelFor(model => model.rank_id)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.rankid)
-                    @Html.ValidationMessageFor(model => model.rankid)
+                    @Html.DropDownListFor(model => model.rank_id, (SelectList)ViewBag.Rank_Type, "Please Select")
+                    @Html.ValidationMessageFor(model => model.rank_id)
                 </div>
             </div>
             <div class="colDiv">
@@ -126,7 +129,7 @@
                 changeYear: true,
                 yearRange: '2014:2050',
                 showButtonPanel: true,
-                dateFormat: 'mm/dd/yy'
+                dateFormat: 'mm-dd-yy'
             });
         });
     </script>

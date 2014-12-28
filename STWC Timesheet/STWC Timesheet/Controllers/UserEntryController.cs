@@ -38,6 +38,8 @@ namespace STWC_Timesheet.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.Users_list = new SelectList(db.users, "user_id", "firstname");
+
             return View();
         }
 

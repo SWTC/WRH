@@ -21,16 +21,19 @@
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                         {
                             @Html.AntiForgeryToken()
-                            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
                         }
                     </text>
-                }
+                    }
                 </div>
             </div>
         </header>
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
+                <div id="login">
+                    @Html.Partial("_LoginPartial")
+                </div>
                 @RenderBody()
             </section>
         </div>
@@ -43,6 +46,8 @@
         </footer>
 
         @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Styles.Render("~/Content/themes/base/css", "~/Content/css")
         @RenderSection("scripts", required: false)
     </body>
 </html>

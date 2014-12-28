@@ -41,7 +41,10 @@ namespace STWC_Timesheet.Controllers
                 var loggedInUser = db.users.SingleOrDefault(u => u.user_name == model.UserName && u.password == model.Password);
                 if (loggedInUser != null)
                 {
-                    FormsAuthentication.SetAuthCookie(model.Password, true);
+                    model.FullName = loggedInUser.firstname + " " + loggedInUser.lastname;
+                    Session["RankId"] = loggedInUser.rank_id;
+                    Session["UserId"] = loggedInUser.user_id;
+                    FormsAuthentication.SetAuthCookie(model.FullName, true);
                     return RedirectToLocal(returnUrl);
                 }
             }
@@ -218,7 +221,7 @@ namespace STWC_Timesheet.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Create", "UserEntry");
             }
         }
 

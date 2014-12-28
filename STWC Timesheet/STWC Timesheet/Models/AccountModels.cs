@@ -60,6 +60,9 @@ namespace STWC_Timesheet.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        [Display(Name = "Full name")]
+        public string FullName { get; set; }
     }
 
     public class RegisterModel
@@ -82,7 +85,7 @@ namespace STWC_Timesheet.Models
 
         [Required]
         [Display(Name = "Rank")]
-        public string RankId { get; set; }
+        public string rank_id { get; set; }
 
         [Required]
         [Display(Name = "Sign On Date")]
