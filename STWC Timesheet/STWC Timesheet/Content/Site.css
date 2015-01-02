@@ -816,3 +816,6 @@ text-decoration: none;
 .normal { padding: 0 10px 0 5px;  margin: 3px; border: solid 1px #666666; background-color: #DBDBDB; }
 .occured { padding: 0 10px 0 5px; margin: 3px; border: solid 1px #666666; background-color: #FF0000; }
 .altered { padding: 0 10px 0 5px; margin: 3px; border: solid 1px #666666; background-color: #428bca; }
+
+.ui-occured { background-image: none !important; background-color: #FF0000 !important; color: #FFFFFF !important; }
+.ui-altered { background-image: none !important; background-color: #428bca !important; color: #FFFFFF !important; }

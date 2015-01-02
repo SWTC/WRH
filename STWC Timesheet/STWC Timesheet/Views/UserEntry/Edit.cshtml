@@ -1,61 +1,229 @@
 ﻿@model STWC_Timesheet.user_entry
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Working Hours";
 }
 
-<h2>Edit</h2>
-
+<h2>Working Hours</h2>
+<div style="height:315px;">
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>user_entry</legend>
-
         @Html.HiddenFor(model => model.entry_id)
+        @Html.HiddenFor(model => model.user_id, new { @Value = Session["UserId"] })
+        @Html.HiddenFor(model => model.work_date)
+        @Html.HiddenFor(model => model.hours_list)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.user_id)
+        <div class="halfDiv" style="width: 40%;">
+        <div class="calendar" style="margin-top: 10px;"></div>
+        <div style="margin: 10px 0 10px 0;">
+            <span class="normal"></span> Normal
+            <span class="occured"></span> Occured N/C
+            <span class="altered"></span> Altered
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.user_id)
-            @Html.ValidationMessageFor(model => model.user_id)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ship_id)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ship_id)
-            @Html.ValidationMessageFor(model => model.ship_id)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.work_date)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.work_date)
-            @Html.ValidationMessageFor(model => model.work_date)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.comments)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.comments)
-            @Html.ValidationMessageFor(model => model.comments)
-        </div>
-
-        <p>
+    </div>
+    <div class="halfDiv"  style="width: 60%;">
+        <fieldset>
+            <legend>Crew Information</legend>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.user_id) : @Session["FullName"]
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.total_hours)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.total_hours)
+                @Html.ValidationMessageFor(model => model.total_hours)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.comments)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.comments)
+                @Html.ValidationMessageFor(model => model.comments)
+            </div>
+        </fieldset>
+        <fieldset style="text-align: right; margin-right:56px">
             <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+        </fieldset>
+    </div>
+    <div style="float: left;">
+        <ol id="numbersol">
+            <li>0</li>
+            <li></li>
+            <li>1</li>
+            <li></li>
+            <li>2</li>
+            <li></li>
+            <li>3</li>
+            <li></li>
+            <li>4</li>
+            <li></li>
+            <li>5</li>
+            <li></li>
+            <li>6</li>
+            <li></li>
+            <li>7</li>
+            <li></li>
+            <li>8</li>
+            <li></li>
+            <li>9</li>
+            <li></li>
+            <li>10</li>
+            <li></li>
+            <li>11</li>
+            <li></li>
+            <li>12</li>
+            <li></li>
+            <li>13</li>
+            <li></li>
+            <li>14</li>
+            <li></li>
+            <li>15</li>
+            <li></li>
+            <li>16</li>
+            <li></li>
+            <li>17</li>
+            <li></li>
+            <li>18</li>
+            <li></li>
+            <li>19</li>
+            <li></li>
+            <li>20</li>
+            <li></li>
+            <li>21</li>
+            <li></li>
+            <li>22</li>
+            <li></li>
+            <li>23</li>
+            <li></li>
+        </ol>
+        <ol id="selectable">
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+        </ol>
+        <span>Worked Hours:</span> <span id="select-result">none</span>
+    </div>
 }
-
-<div>
+</div>
+<div style="text-align: left;">
     @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.calendar').datepicker({
+                dateFormat: 'dd-mm-yy',
+                onSelect: function (value, date) {
+                    $('#work_date').val(value);
+                }
+            });
+
+            if ($('#hours_list').val() != '') {
+                var arr = $('#hours_list').val().split(",");
+                for (var i = 0; i < arr.length; i++) {
+                    $("#selectable li").eq(arr[i]).addClass('ui-selected');
+                }
+            }
+
+            $('#work_date').val($('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).val());
+
+            var _selectRange = false, _deselectQueue = [];
+            $(function () {
+                $("#selectable").selectable({
+                    selecting: function (event, ui) {
+                        if (event.detail == 0) {
+                            _selectRange = true;
+                            return true;
+                        }
+                        if ($(ui.selecting).hasClass('ui-selected')) {
+                            _deselectQueue.push(ui.selecting);
+                        }
+                    },
+                    unselecting: function (event, ui) {
+                        $(ui.unselecting).addClass('ui-selected');
+                    },
+                    stop: function () {
+                        if (!_selectRange) {
+                            $.each(_deselectQueue, function (ix, de) {
+                                $(de)
+                        .removeClass('ui-selecting')
+                        .removeClass('ui-selected');
+                            });
+                        }
+                        _selectRange = false;
+                        _deselectQueue = [];
+
+                        var result = '';
+                        var count = 0;
+                        $(".ui-selected", this).each(function () {
+                            var index = $("#selectable li").index(this);
+                            result = result + index + ",";
+                            count = count + 1;
+                        });
+
+                        var workedhours = count / 2;
+                        var resthours = 24 - workedhours;
+                        $('#total_hours').val(workedhours);
+                        $('#hours_list').val(result.substr(0, result.length - 1));
+                        if (resthours < 10) {
+                            $('td.ui-datepicker-current-day a').addClass('ui-occured');
+                        } else {
+                            $('td.ui-datepicker-current-day a').removeClass('ui-occured');
+                        }
+
+                    }
+                });
+            });
+        });
+    </script>
 }

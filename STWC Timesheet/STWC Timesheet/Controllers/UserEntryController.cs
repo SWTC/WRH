@@ -15,6 +15,7 @@ namespace STWC_Timesheet.Controllers
         //
         // GET: /UserEntry/
 
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.user_entry.ToList());
@@ -38,8 +39,17 @@ namespace STWC_Timesheet.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Users_list = new SelectList(db.users, "user_id", "firstname");
-
+            int userid = Convert.ToInt32(Session["UserId"]);
+            DateTime curdate = DateTime.Today;
+            DateTime yesdate = DateTime.Today.AddDays(-1);
+            DateTime tomdate = DateTime.Today.AddDays(1);
+            var user_entry = (from ue in db.user_entry
+                              where ue.user_id == userid && ue.work_date == curdate
+                               select ue).FirstOrDefault();
+            if (user_entry != null)
+            {
+                return RedirectToAction("Edit", new { id = user_entry.entry_id });
+            }
             return View();
         }
 
@@ -53,7 +63,7 @@ namespace STWC_Timesheet.Controllers
             {
                 db.user_entry.AddObject(user_entry);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", new { id = user_entry.entry_id });
             }
 
             return View(user_entry);
@@ -72,6 +82,18 @@ namespace STWC_Timesheet.Controllers
             return View(user_entry);
         }
 
+        public ActionResult LoadWorkHours(int id, DateTime currdate)
+        {
+            var user_entry = (from ue in db.user_entry
+                              where ue.user_id == id && ue.work_date == currdate
+                              select ue).FirstOrDefault();
+            if (user_entry != null)
+            {
+                return RedirectToAction("Edit", new { id = user_entry.entry_id });
+            }
+            return View();
+        }
+
         //
         // POST: /UserEntry/Edit/5
 
@@ -83,7 +105,7 @@ namespace STWC_Timesheet.Controllers
                 db.user_entry.Attach(user_entry);
                 db.ObjectStateManager.ChangeObjectState(user_entry, EntityState.Modified);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", new { id = user_entry.entry_id });
             }
             return View(user_entry);
         }
