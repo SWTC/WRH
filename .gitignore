@@ -4,3 +4,5 @@ STWC Timesheet/STWC Timesheet.suo
 /STWCSetup/Debug
 /STWCSetup/Release
 /STWC Timesheet/*.suo
+/STWC Timesheet/KeyGenerator/bin
+/STWC Timesheet/KeyGenerator/obj
