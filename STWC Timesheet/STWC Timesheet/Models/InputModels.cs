@@ -92,11 +92,6 @@ namespace STWC_Timesheet
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string password;
-
-        [Display(Name = "Confirm new password")]
-        [DataType(DataType.Password)]
-        [Compare("password", ErrorMessage = "The new password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
     }
 
     [MetadataType(typeof(UserEntryHelper))]
@@ -110,6 +105,9 @@ namespace STWC_Timesheet
         [Display(Name = "Full Name")]
         [Required(ErrorMessage = "Select crew member")]
         public string user_id;
+
+        [Display(Name = "Worked hours")]
+        public string total_hours;
 
         [Display(Name = "Comments")]
         public string comments;

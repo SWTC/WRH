@@ -20,8 +20,8 @@ using System.Xml.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("stwcModel", "FK_ships_users", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(STWC_Timesheet.user), "ship", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(STWC_Timesheet.ship), true)]
-[assembly: EdmRelationshipAttribute("stwcModel", "FK_user_entry_users", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(STWC_Timesheet.user), "user_entry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(STWC_Timesheet.user_entry), true)]
 [assembly: EdmRelationshipAttribute("stwcModel", "FK_users_rank", "rank", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(STWC_Timesheet.rank), "user", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(STWC_Timesheet.user), true)]
+[assembly: EdmRelationshipAttribute("stwcModel", "FK_user_entry_users", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(STWC_Timesheet.user), "user_entry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(STWC_Timesheet.user_entry), true)]
 
 #endregion
 
@@ -92,22 +92,6 @@ namespace STWC_Timesheet
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<user_entry> user_entry
-        {
-            get
-            {
-                if ((_user_entry == null))
-                {
-                    _user_entry = base.CreateObjectSet<user_entry>("user_entry");
-                }
-                return _user_entry;
-            }
-        }
-        private ObjectSet<user_entry> _user_entry;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<user> users
         {
             get
@@ -136,6 +120,22 @@ namespace STWC_Timesheet
             }
         }
         private ObjectSet<rank> _ranks;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<user_entry> user_entry
+        {
+            get
+            {
+                if ((_user_entry == null))
+                {
+                    _user_entry = base.CreateObjectSet<user_entry>("user_entry");
+                }
+                return _user_entry;
+            }
+        }
+        private ObjectSet<user_entry> _user_entry;
 
         #endregion
 
@@ -147,14 +147,6 @@ namespace STWC_Timesheet
         public void AddToships(ship ship)
         {
             base.AddObject("ships", ship);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the user_entry EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTouser_entry(user_entry user_entry)
-        {
-            base.AddObject("user_entry", user_entry);
         }
     
         /// <summary>
@@ -171,6 +163,14 @@ namespace STWC_Timesheet
         public void AddToranks(rank rank)
         {
             base.AddObject("ranks", rank);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the user_entry EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTouser_entry(user_entry user_entry)
+        {
+            base.AddObject("user_entry", user_entry);
         }
 
         #endregion
@@ -848,28 +848,6 @@ namespace STWC_Timesheet
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("stwcModel", "FK_user_entry_users", "user_entry")]
-        public EntityCollection<user_entry> user_entry
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<user_entry>("stwcModel.FK_user_entry_users", "user_entry");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<user_entry>("stwcModel.FK_user_entry_users", "user_entry", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("stwcModel", "FK_users_rank", "rank")]
         public rank rank
         {
@@ -898,6 +876,28 @@ namespace STWC_Timesheet
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<rank>("stwcModel.FK_users_rank", "rank", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("stwcModel", "FK_user_entry_users", "user_entry")]
+        public EntityCollection<user_entry> user_entry
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<user_entry>("stwcModel.FK_user_entry_users", "user_entry");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<user_entry>("stwcModel.FK_user_entry_users", "user_entry", value);
                 }
             }
         }
@@ -1005,6 +1005,54 @@ namespace STWC_Timesheet
         private Nullable<global::System.DateTime> _work_date;
         partial void Onwork_dateChanging(Nullable<global::System.DateTime> value);
         partial void Onwork_dateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String hours_list
+        {
+            get
+            {
+                return _hours_list;
+            }
+            set
+            {
+                Onhours_listChanging(value);
+                ReportPropertyChanging("hours_list");
+                _hours_list = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("hours_list");
+                Onhours_listChanged();
+            }
+        }
+        private global::System.String _hours_list;
+        partial void Onhours_listChanging(global::System.String value);
+        partial void Onhours_listChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> total_hours
+        {
+            get
+            {
+                return _total_hours;
+            }
+            set
+            {
+                Ontotal_hoursChanging(value);
+                ReportPropertyChanging("total_hours");
+                _total_hours = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("total_hours");
+                Ontotal_hoursChanged();
+            }
+        }
+        private Nullable<global::System.Double> _total_hours;
+        partial void Ontotal_hoursChanging(Nullable<global::System.Double> value);
+        partial void Ontotal_hoursChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

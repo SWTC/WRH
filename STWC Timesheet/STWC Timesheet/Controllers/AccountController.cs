@@ -44,6 +44,7 @@ namespace STWC_Timesheet.Controllers
                     model.FullName = loggedInUser.firstname + " " + loggedInUser.lastname;
                     Session["RankId"] = loggedInUser.rank_id;
                     Session["UserId"] = loggedInUser.user_id;
+                    Session["FullName"] = model.FullName;
                     FormsAuthentication.SetAuthCookie(model.FullName, true);
                     return RedirectToLocal(returnUrl);
                 }

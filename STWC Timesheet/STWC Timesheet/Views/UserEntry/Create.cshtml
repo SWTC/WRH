@@ -1,12 +1,17 @@
-﻿@model STWC_Timesheet.Models.InputModels
+﻿@model STWC_Timesheet.user_entry
 @{
     ViewBag.Title = "Working Hours";
 }
 
 <h2>Working Hours</h2>
-
+<div style="height:315px;">
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.user_id, new { @Value = Session["UserId"] })
+    @Html.HiddenFor(model => model.work_date)
+    @Html.HiddenFor(model => model.hours_list)
+
     <div class="halfDiv" style="width: 40%;">
         <div class="calendar" style="margin-top: 10px;"></div>
         <div style="margin: 10px 0 10px 0;">
@@ -19,22 +24,24 @@
         <fieldset>
             <legend>Crew Information</legend>
             <div class="editor-label">
-                @Html.LabelFor(model => model.UserEntryModel.user_id)
+                @Html.LabelFor(model => model.user_id) : @Session["FullName"]
             </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(model => model.UserEntryModel.user_id, (SelectList)ViewBag.Users_list, "Please Select")
-                @Html.ValidationMessageFor(model => model.UserEntryModel.user_id)
-            </div>
-                
             <div class="editor-label">
-                @Html.LabelFor(model => model.UserEntryModel.comments)
+                @Html.LabelFor(model => model.total_hours)
             </div>
             <div class="editor-field">
-                @Html.TextAreaFor(model => model.UserEntryModel.comments)
-                @Html.ValidationMessageFor(model => model.UserEntryModel.comments)
+                @Html.TextBoxFor(model => model.total_hours)
+                @Html.ValidationMessageFor(model => model.total_hours)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.comments)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.comments)
+                @Html.ValidationMessageFor(model => model.comments)
             </div>
         </fieldset>
-        <fieldset style="text-align: right;">
+        <fieldset style="text-align: right; margin-right:56px">
             <input type="submit" value="Save" />
         </fieldset>
     </div>
@@ -142,8 +149,8 @@
         <span>Worked Hours:</span> <span id="select-result">none</span>
     </div>
 }
-
-<div>
+</div>
+<div style="text-align: left;">
     @Html.ActionLink("Back to List", "Index")
 </div>
 
@@ -152,44 +159,79 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.calendar').datepicker();
-            $("#selectable").selectable({
-                selecting: function (event, ui) {
-                    if (event.detail == 0) {
-                        _selectRange = true;
-                        return true;
-                    }
-                    if ($(ui.selecting).hasClass('ui-selected')) {
-                        _deselectQueue.push(ui.selecting);
-                    }
-                },
-                unselecting: function (event, ui) {
-                    $(ui.unselecting).addClass('ui-selected');
-                },
-                stop: function () {
-                    if (!_selectRange) {
-                        $.each(_deselectQueue, function (ix, de) {
-                            $(de)
-                        .removeClass('ui-selecting')
-                        .removeClass('ui-selected');
-                        });
-                    }
-                    _selectRange = false;
-                    _deselectQueue = [];
+            $('.calendar').datepicker({
+                dateFormat: 'dd-mm-yy',
+                onSelect: function (value, date) {
+                    $('#work_date').val(value);
+                    var id = $('#user_id').val();
+                    $.ajax({
+                        url: '/UserEntry/Edit',
+                        type: 'POST',
+                        data: { id: id, currdate: value },
+                        success: function (data) {}
+                    });
+
                 }
             });
 
-            $("#selectable").selectable({
-                stop: function () {
-                    var result = $("#select-result").empty();
-                    var count = 0;
-                    $(".ui-selected", this).each(function () {
-                        var index = $("#selectable li").index(this);
-                        result.append(" #" + index);
-                        count = count + 1;
-                    });
-                    result.append(" = " + count / 2);
+            if ($('#hours_list').val() != '') {
+                var arr = $('#hours_list').val().split(",");
+                for (var i = 0; i < arr.length; i++) {
+                    $("#selectable li").eq(arr[i]).addClass('ui-selected');
                 }
+                var currentDate = $('#work_date').val();
+                alert(currentDate);
+                $('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker("setDate", currentDate);
+            }
+
+            $('#work_date').val($('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).val());
+
+            var _selectRange = false, _deselectQueue = [];
+            $(function () {
+                $("#selectable").selectable({
+                    selecting: function (event, ui) {
+                        if (event.detail == 0) {
+                            _selectRange = true;
+                            return true;
+                        }
+                        if ($(ui.selecting).hasClass('ui-selected')) {
+                            _deselectQueue.push(ui.selecting);
+                        }
+                    },
+                    unselecting: function (event, ui) {
+                        $(ui.unselecting).addClass('ui-selected');
+                    },
+                    stop: function () {
+                        if (!_selectRange) {
+                            $.each(_deselectQueue, function (ix, de) {
+                                $(de)
+                        .removeClass('ui-selecting')
+                        .removeClass('ui-selected');
+                            });
+                        }
+                        _selectRange = false;
+                        _deselectQueue = [];
+
+                        var result = '';
+                        var count = 0;
+                        $(".ui-selected", this).each(function () {
+                            var index = $("#selectable li").index(this);
+                            result = result + index + ",";
+                            count = count + 1;
+                        });
+
+                        var workedhours = count / 2;
+                        var resthours = 24 - workedhours;
+                        $('#total_hours').val(workedhours);
+                        $('#hours_list').val(result.substr(0, result.length - 1));
+                        if (resthours < 10) {
+                            $('td.ui-datepicker-current-day a').addClass('ui-occured');
+                        } else {
+                            $('td.ui-datepicker-current-day a').removeClass('ui-occured');
+                        }
+
+                    }
+                });
             });
         });
     </script>

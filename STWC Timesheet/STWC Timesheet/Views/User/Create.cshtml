@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.password, new { @Value = "Password123" })
+    @Html.HiddenFor(model => model.password, new { @Value = "Password" })
     <div class="regsection">
         <div class="rowDiv">
             <div class="colDiv">
@@ -129,7 +129,7 @@
                 changeYear: true,
                 yearRange: '2014:2050',
                 showButtonPanel: true,
-                dateFormat: 'mm-dd-yy'
+                dateFormat: 'dd-mm-yy'
             });
         });
     </script>
