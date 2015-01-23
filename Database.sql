@@ -108,6 +108,7 @@ CREATE TABLE [dbo].[ships](
 	[ship_IMO] [int] NULL,
 	[serial_number] [int] NULL,
 	[licence_key] [varchar](50) NULL,
+	[flag] [varchar](50) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[ship_id] ASC
@@ -138,15 +139,18 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[user_entry](
-	[entry_id] [int] NOT NULL,
+	[entry_id] [int] IDENTITY(1,1) NOT NULL,
 	[user_id] [int] NULL,
 	[work_date] [date] NULL,
-	[comments] [text] NULL,
-PRIMARY KEY CLUSTERED 
+	[hours_list] [varchar](100) NULL,
+	[total_hours] [float] NULL,
+	[comments] [varchar](max) NULL,
+	[nc_remarks] [varchar](max) NULL,
+ CONSTRAINT [PK__user_ent__810FDCE10425A276] PRIMARY KEY CLUSTERED 
 (
 	[entry_id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 
 GO
 

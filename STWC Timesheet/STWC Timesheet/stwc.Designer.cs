@@ -435,6 +435,30 @@ namespace STWC_Timesheet
         private global::System.String _licence_key;
         partial void Onlicence_keyChanging(global::System.String value);
         partial void Onlicence_keyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String flag
+        {
+            get
+            {
+                return _flag;
+            }
+            set
+            {
+                OnflagChanging(value);
+                ReportPropertyChanging("flag");
+                _flag = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("flag");
+                OnflagChanged();
+            }
+        }
+        private global::System.String _flag;
+        partial void OnflagChanging(global::System.String value);
+        partial void OnflagChanged();
 
         #endregion
 
@@ -1077,6 +1101,30 @@ namespace STWC_Timesheet
         private global::System.String _comments;
         partial void OncommentsChanging(global::System.String value);
         partial void OncommentsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String nc_remarks
+        {
+            get
+            {
+                return _nc_remarks;
+            }
+            set
+            {
+                Onnc_remarksChanging(value);
+                ReportPropertyChanging("nc_remarks");
+                _nc_remarks = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("nc_remarks");
+                Onnc_remarksChanged();
+            }
+        }
+        private global::System.String _nc_remarks;
+        partial void Onnc_remarksChanging(global::System.String value);
+        partial void Onnc_remarksChanged();
 
         #endregion
 

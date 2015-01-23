@@ -19,30 +19,6 @@ namespace STWC_Timesheet.Models
 
 namespace STWC_Timesheet
 {
-    public class Inputs
-    {
-        [Required]
-        [Display(Name = "Crew Member")]
-        public string CrewMember { get; set; }
-
-        [Required]
-        [Display(Name = "Position")]
-        public string Position { get; set; }
-
-        [Required]
-        [Display(Name = "Full Name")]
-        public string FullName { get; set; }
-
-        [Display(Name = "Comments")]
-        public string Comments { get; set; }
-
-        [Display(Name = "Service Terms")]
-        public string ServiceTerms { get; set; }
-
-        [Display(Name = "Non Conformities")]
-        public string NonConformities { get; set; }
-    }
-
     [MetadataType(typeof(UserHelper))]
     public partial class user
     {
@@ -111,6 +87,9 @@ namespace STWC_Timesheet
 
         [Display(Name = "Comments")]
         public string comments;
+
+        [Display(Name = "Service Terms")]
+        public string nc_remarks;
     }
 
     [MetadataType(typeof(ShipHelper))]
@@ -132,6 +111,10 @@ namespace STWC_Timesheet
         [Display(Name = "IMO")]
         [Required(ErrorMessage = "IMO is required")]
         public string ship_IMO;
+
+        [Display(Name = "Flag")]
+        [Required(ErrorMessage = "Flag is required")]
+        public string flag;
 
         [Display(Name = "Serial No.")]
         public string serial_number;

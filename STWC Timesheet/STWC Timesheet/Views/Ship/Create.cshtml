@@ -21,8 +21,6 @@
                     @Html.ValidationMessageFor(model => model.ShipModel.ship_name)
                 </div>
             </div>
-        </div>
-        <div class="rowDiv">
             <div class="colDiv">
                 <div class="editor-label">
                     @Html.LabelFor(model => model.ShipModel.ship_IMO)
@@ -30,6 +28,17 @@
                 <div class="editor-field">
                     @Html.EditorFor(model => model.ShipModel.ship_IMO)
                     @Html.ValidationMessageFor(model => model.ShipModel.ship_IMO)
+                </div>
+            </div>
+        </div>
+        <div class="rowDiv">
+            <div class="colDiv" style="width:525px;">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ShipModel.flag)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.ShipModel.flag)
+                    @Html.ValidationMessageFor(model => model.ShipModel.flag)
                 </div>
             </div>
         </div>
@@ -43,8 +52,6 @@
                     @Html.ValidationMessageFor(model => model.ShipModel.serial_number)
                 </div>
             </div>
-        </div>
-        <div class="rowDiv">
             <div class="colDiv">
                 <div class="editor-field" style="padding-top:35px;">
                     @Html.ActionLink("Copy to clipboard", "Index")

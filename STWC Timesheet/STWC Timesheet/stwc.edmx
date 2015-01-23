@@ -39,6 +39,7 @@
           <Property Name="ship_IMO" Type="int" />
           <Property Name="serial_number" Type="int" />
           <Property Name="licence_key" Type="varchar" MaxLength="50" />
+          <Property Name="flag" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="user_entry">
           <Key>
@@ -49,7 +50,8 @@
           <Property Name="work_date" Type="date" />
           <Property Name="hours_list" Type="varchar" MaxLength="100" />
           <Property Name="total_hours" Type="float" />
-          <Property Name="comments" Type="text" />
+          <Property Name="comments" Type="varchar(max)" />
+          <Property Name="nc_remarks" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -136,6 +138,7 @@
           <Property Type="Int32" Name="serial_number" />
           <Property Type="String" Name="licence_key" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="user" Relationship="stwcModel.FK_ships_users" FromRole="ship" ToRole="user" />
+          <Property Type="String" Name="flag" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -200,6 +203,7 @@
           <Property Type="Double" Name="total_hours" />
           <Property Type="String" Name="comments" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="user" Relationship="stwcModel.FK_user_entry_users" FromRole="user_entry" ToRole="user" />
+          <Property Type="String" Name="nc_remarks" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_user_entry_users">
           <End Type="stwcModel.user" Role="user" Multiplicity="0..1" />
@@ -222,6 +226,7 @@
           <EntitySetMapping Name="ships">
             <EntityTypeMapping TypeName="stwcModel.ship">
               <MappingFragment StoreEntitySet="ships">
+                <ScalarProperty Name="flag" ColumnName="flag" />
                 <ScalarProperty Name="licence_key" ColumnName="licence_key" />
                 <ScalarProperty Name="serial_number" ColumnName="serial_number" />
                 <ScalarProperty Name="ship_IMO" ColumnName="ship_IMO" />
@@ -259,6 +264,7 @@
           <EntitySetMapping Name="user_entry">
             <EntityTypeMapping TypeName="stwcModel.user_entry">
               <MappingFragment StoreEntitySet="user_entry">
+                <ScalarProperty Name="nc_remarks" ColumnName="nc_remarks" />
                 <ScalarProperty Name="comments" ColumnName="comments" />
                 <ScalarProperty Name="total_hours" ColumnName="total_hours" />
                 <ScalarProperty Name="hours_list" ColumnName="hours_list" />

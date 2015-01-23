@@ -34,6 +34,13 @@
                 @Html.ValidationMessageFor(model => model.total_hours)
             </div>
             <div class="editor-label">
+                @Html.LabelFor(model => model.nc_remarks)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.nc_remarks, new{@readonly = "readonly"})
+                @Html.ValidationMessageFor(model => model.nc_remarks)
+            </div>
+            <div class="editor-label">
                 @Html.LabelFor(model => model.comments)
             </div>
             <div class="editor-field">
@@ -168,7 +175,9 @@
                         url: '/UserEntry/Edit',
                         type: 'POST',
                         data: { id: id, currdate: value },
-                        success: function (data) {}
+                        success: function (data) {
+                            alert("hello");
+                        }
                     });
 
                 }
@@ -226,8 +235,10 @@
                         $('#hours_list').val(result.substr(0, result.length - 1));
                         if (resthours < 10) {
                             $('td.ui-datepicker-current-day a').addClass('ui-occured');
+                            $('#nc_remarks').val("A minimum of 10 hours of rest in any 24-hour period");
                         } else {
                             $('td.ui-datepicker-current-day a').removeClass('ui-occured');
+                            $('#nc_remarks').val("");
                         }
 
                     }
