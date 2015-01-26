@@ -90,8 +90,23 @@ namespace STWC_Timesheet.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
+                    //WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    //WebSecurity.Login(model.UserName, model.Password);
+
+                    user crew = new user();
+                    crew.firstname = model.FirstName;
+                    crew.lastname = model.LastName;
+                    crew.email = model.Email;
+                    crew.cdc_number = model.CDC_Number;
+                    crew.user_name = model.UserName;
+                    crew.passport_number = model.Passport_Number;
+                    crew.password = model.Password;
+                    crew.signon_date = Convert.ToDateTime(model.Signon_date);
+                    crew.rank_id = 2;
+
+                    db.users.AddObject(crew);
+                    db.SaveChanges();
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)

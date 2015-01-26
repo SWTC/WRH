@@ -43,6 +43,26 @@ namespace STWC_Timesheet.Controllers
             return View(user);
         }
 
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(user model)
+        {
+            if (ModelState.IsValid)
+            {
+                db.users.AddObject(model);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
         //
         // GET: /User/Create
 
@@ -75,8 +95,8 @@ namespace STWC_Timesheet.Controllers
         public ActionResult Edit(int id = 0)
         {
             var selected = (from sel in db.users
-                               where sel.user_id == id
-                               select sel.rank_id).FirstOrDefault();
+                            where sel.user_id == id
+                            select sel.rank_id).FirstOrDefault();
             ViewBag.Rank_Type = new SelectList(db.ranks, "rank_id", "rank_name", selected);
 
             user user = db.users.Single(u => u.user_id == id);
@@ -128,6 +148,32 @@ namespace STWC_Timesheet.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult ChangePassword(int id = 0)
+        {
+            var selected = (from sel in db.users
+                            where sel.user_id == id
+                            select sel.rank_id).FirstOrDefault();
+            ViewBag.Rank_Type = new SelectList(db.ranks, "rank_id", "rank_name", selected);
+
+            user user = db.users.Single(u => u.user_id == id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(user model)
+        {
+            user oldUser = db.users.Single(u => u.user_id == model.user_id);
+            oldUser.password = model.password;
+            db.users.Attach(oldUser);
+            db.ObjectStateManager.ChangeObjectState(oldUser, EntityState.Modified);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
@@ -159,7 +205,7 @@ namespace STWC_Timesheet.Controllers
             ViewBag.UserNameSortParm = sortOrder == "UN_desc" ? "UN_desc" : "UN_asc";
 
             var users = from u in db.users
-                         select u;
+                        select u;
 
             if (!String.IsNullOrEmpty(searchString))
             {

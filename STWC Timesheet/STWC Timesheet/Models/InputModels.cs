@@ -22,7 +22,10 @@ namespace STWC_Timesheet
     [MetadataType(typeof(UserHelper))]
     public partial class user
     {
-        
+        [Display(Name = "Confirm new password")]
+        [DataType(DataType.Password)]
+        [Compare("password", ErrorMessage = "The new password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
     }
 
     public class UserHelper
