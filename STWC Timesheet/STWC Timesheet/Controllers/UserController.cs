@@ -148,12 +148,14 @@ namespace STWC_Timesheet.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ChangePassword(int id = 0)
+        public ActionResult ChangePassword()
         {
+            int id = 0;
+            if (Session["UserId"] != null)
+                id = Convert.ToInt32(Session["UserId"]);
             var selected = (from sel in db.users
                             where sel.user_id == id
                             select sel.rank_id).FirstOrDefault();
-            ViewBag.Rank_Type = new SelectList(db.ranks, "rank_id", "rank_name", selected);
 
             user user = db.users.Single(u => u.user_id == id);
             if (user == null)
@@ -168,7 +170,6 @@ namespace STWC_Timesheet.Controllers
         {
             user oldUser = db.users.Single(u => u.user_id == model.user_id);
             oldUser.password = model.password;
-            db.users.Attach(oldUser);
             db.ObjectStateManager.ChangeObjectState(oldUser, EntityState.Modified);
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
