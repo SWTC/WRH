@@ -30,7 +30,7 @@
                 @Html.LabelFor(model => model.total_hours)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(model => model.total_hours)
+                @Html.TextBoxFor(model => model.total_hours, new { @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.total_hours)
             </div>
             <div class="editor-label">
@@ -153,12 +153,8 @@
           <li class="ui-widget-content"></li>
           <li class="ui-widget-content"></li>
         </ol>
-        <span>Worked Hours:</span> <span id="select-result">none</span>
     </div>
 }
-</div>
-<div style="text-align: left;">
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
@@ -171,15 +167,7 @@
                 onSelect: function (value, date) {
                     $('#work_date').val(value);
                     var id = $('#user_id').val();
-                    $.ajax({
-                        url: '/UserEntry/Edit',
-                        type: 'POST',
-                        data: { id: id, currdate: value },
-                        success: function (data) {
-                            alert("hello");
-                        }
-                    });
-
+                    window.location.href = '/UserEntry/Edit/' + id + '?currdate=' + value;
                 }
             });
 

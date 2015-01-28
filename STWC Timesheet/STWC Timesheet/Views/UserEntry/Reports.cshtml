@@ -1,0 +1,25 @@
+﻿@model STWC_Timesheet.Models.RegisterModel
+@{
+    ViewBag.Title = "Reports";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <section class="regsection">
+        
+    </section>
+    <section class="usersection">
+
+    </section>
+        
+    @Html.ValidationSummary()
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

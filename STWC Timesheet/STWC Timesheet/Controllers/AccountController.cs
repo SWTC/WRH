@@ -237,7 +237,14 @@ namespace STWC_Timesheet.Controllers
             }
             else
             {
-                return RedirectToAction("Create", "UserEntry");
+                if (Convert.ToInt32(Session["RankId"]) == 1)
+                {
+                    return RedirectToAction("Index", "User");
+                }
+                else
+                {
+                    return RedirectToAction("Create", "UserEntry");
+                }
             }
         }
 

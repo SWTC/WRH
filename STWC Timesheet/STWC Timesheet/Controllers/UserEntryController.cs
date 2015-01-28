@@ -82,17 +82,18 @@ namespace STWC_Timesheet.Controllers
             return View(user_entry);
         }
 
-        public ActionResult LoadWorkHours(int id, DateTime currdate)
-        {
-            var user_entry = (from ue in db.user_entry
-                              where ue.user_id == id && ue.work_date == currdate
-                              select ue).FirstOrDefault();
-            if (user_entry != null)
-            {
-                return RedirectToAction("Edit", new { id = user_entry.entry_id });
-            }
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult Edit(int id, DateTime currdate)
+        //{
+        //    var user_entry = (from ue in db.user_entry
+        //                      where ue.user_id == id && ue.work_date == currdate
+        //                      select ue).FirstOrDefault();
+        //    if (user_entry != null)
+        //    {
+        //        return RedirectToAction("Edit", new { id = user_entry.entry_id });
+        //    }
+        //    return View();
+        //}
 
         //
         // POST: /UserEntry/Edit/5
@@ -139,6 +140,25 @@ namespace STWC_Timesheet.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        //Reports
+
+        public ActionResult Reports()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Reports(user_entry model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
     }
 }

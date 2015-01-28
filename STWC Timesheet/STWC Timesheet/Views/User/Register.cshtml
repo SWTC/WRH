@@ -15,7 +15,7 @@
         <div class="rowDiv">
             <div class="colDiv">
                 @Html.LabelFor(m => m.rank_id)
-                @Html.TextBoxFor(m => m.rank_id)
+                @Html.DropDownListFor(m => m.rank_id, (SelectList)ViewBag.Rank_Type_Reg, "Please Select")
             </div>
             <div class="colDiv">
                 @Html.LabelFor(m => m.email)
@@ -45,7 +45,7 @@
         <div class="rowDiv">
             <div class="colDiv">
                 @Html.LabelFor(m => m.signon_date)
-                @Html.TextBoxFor(m => m.signon_date)
+                @Html.EditorFor(m => m.signon_date)
             </div>
         </div>
     </section>
@@ -75,4 +75,16 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '2014:2050',
+                showButtonPanel: true,
+                dateFormat: 'mm-dd-yy'
+            });
+        });
+    </script>
 }

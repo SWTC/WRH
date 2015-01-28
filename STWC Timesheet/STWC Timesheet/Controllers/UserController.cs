@@ -45,6 +45,7 @@ namespace STWC_Timesheet.Controllers
 
         public ActionResult Register()
         {
+            ViewBag.Rank_Type_Reg = new SelectList(db.ranks, "rank_id", "rank_name");
             return View();
         }
 
@@ -56,7 +57,7 @@ namespace STWC_Timesheet.Controllers
                 db.users.AddObject(model);
                 db.SaveChanges();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -172,7 +173,7 @@ namespace STWC_Timesheet.Controllers
             oldUser.password = model.password;
             db.ObjectStateManager.ChangeObjectState(oldUser, EntityState.Modified);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "User");
         }
 
         protected override void Dispose(bool disposing)

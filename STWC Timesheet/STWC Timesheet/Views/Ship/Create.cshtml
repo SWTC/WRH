@@ -1,4 +1,4 @@
-﻿@model STWC_Timesheet.Models.InputModels
+﻿@model STWC_Timesheet.ship
 
 @{
     ViewBag.Title = "Register Ship";
@@ -14,42 +14,42 @@
         <div class="rowDiv">
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.ShipModel.ship_name)
+                    @Html.LabelFor(model => model.ship_name)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.ShipModel.ship_name)
-                    @Html.ValidationMessageFor(model => model.ShipModel.ship_name)
+                    @Html.TextBoxFor(model => model.ship_name)
+                    @Html.ValidationMessageFor(model => model.ship_name)
                 </div>
             </div>
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.ShipModel.ship_IMO)
+                    @Html.LabelFor(model => model.ship_IMO)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.ShipModel.ship_IMO)
-                    @Html.ValidationMessageFor(model => model.ShipModel.ship_IMO)
+                    @Html.TextBoxFor(model => model.ship_IMO)
+                    @Html.ValidationMessageFor(model => model.ship_IMO)
                 </div>
             </div>
         </div>
         <div class="rowDiv">
             <div class="colDiv" style="width:525px;">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.ShipModel.flag)
+                    @Html.LabelFor(model => model.flag)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.ShipModel.flag)
-                    @Html.ValidationMessageFor(model => model.ShipModel.flag)
+                    @Html.TextBoxFor(model => model.flag)
+                    @Html.ValidationMessageFor(model => model.flag)
                 </div>
             </div>
         </div>
         <div class="rowDiv">
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.ShipModel.serial_number)
+                    @Html.LabelFor(model => model.serial_number)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.ShipModel.serial_number)
-                    @Html.ValidationMessageFor(model => model.ShipModel.serial_number)
+                    @Html.TextBoxFor(model => model.serial_number)
+                    @Html.ValidationMessageFor(model => model.serial_number)
                 </div>
             </div>
             <div class="colDiv">
@@ -62,11 +62,11 @@
         <div class="rowDiv">
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.ShipModel.licence_key)
+                    @Html.LabelFor(model => model.licence_key)
                 </div>
                 <div class="editor-field">
-                    @Html.TextBoxFor(model => model.ShipModel.licence_key, new { style = "width:450px;" })
-                    @Html.ValidationMessageFor(model => model.ShipModel.licence_key)
+                    @Html.TextBoxFor(model => model.licence_key, new { style = "width:450px;" })
+                    @Html.ValidationMessageFor(model => model.licence_key)
                 </div>
             </div>
         </div>
@@ -82,10 +82,10 @@
         <div class="rowDiv">
             <div class="colDiv">
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.ShipModel.comp_name)
+                    @Html.LabelFor(model => model.comp_name)
                 </div>
                 <div class="editor-field">
-                    @Html.DisplayFor(model => model.ShipModel.comp_name)
+                    @Html.DisplayFor(model => model.comp_name)
                 </div>
             </div>
             <div class="colDiv">
