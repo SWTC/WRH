@@ -12,6 +12,7 @@
 
     @Html.HiddenFor(model => model.user_id)
     @Html.HiddenFor(model => model.password)
+    @Html.HiddenFor(model => model.ConfirmPassword, new {@Value = Model.password})
     <section class="regsection">
         <div class="rowDiv">
             <div class="colDiv">
@@ -129,7 +130,7 @@
                 changeYear: true,
                 yearRange: '2014:2050',
                 showButtonPanel: true,
-                dateFormat: 'mm-dd-yy'
+                dateFormat: 'yy-mm-dd'
             });
         });
     </script>

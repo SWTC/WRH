@@ -114,6 +114,8 @@ namespace STWC_Timesheet.Controllers
         [HttpPost]
         public ActionResult Edit(user user)
         {
+            ViewBag.Rank_Type = new SelectList(db.ranks, "rank_id", "rank_name");
+            
             if (ModelState.IsValid)
             {
                 db.users.Attach(user);
