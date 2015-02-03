@@ -19,9 +19,9 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("stwcModel", "FK_ships_users", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(STWC_Timesheet.user), "ship", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(STWC_Timesheet.ship), true)]
 [assembly: EdmRelationshipAttribute("stwcModel", "FK_users_rank", "rank", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(STWC_Timesheet.rank), "user", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(STWC_Timesheet.user), true)]
 [assembly: EdmRelationshipAttribute("stwcModel", "FK_user_entry_users", "user", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(STWC_Timesheet.user), "user_entry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(STWC_Timesheet.user_entry), true)]
+[assembly: EdmRelationshipAttribute("stwcModel", "FK_users_ships", "ship", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(STWC_Timesheet.ship), "user", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(STWC_Timesheet.user), true)]
 
 #endregion
 
@@ -471,34 +471,18 @@ namespace STWC_Timesheet
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("stwcModel", "FK_ships_users", "user")]
-        public user user
+        [EdmRelationshipNavigationPropertyAttribute("stwcModel", "FK_users_ships", "user")]
+        public EntityCollection<user> users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("stwcModel.FK_ships_users", "user").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("stwcModel.FK_ships_users", "user").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<user> userReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<user>("stwcModel.FK_ships_users", "user");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<user>("stwcModel.FK_users_ships", "user");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<user>("stwcModel.FK_ships_users", "user", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<user>("stwcModel.FK_users_ships", "user", value);
                 }
             }
         }
@@ -834,44 +818,6 @@ namespace STWC_Timesheet
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("stwcModel", "FK_ships_users", "ship")]
-        public ship ship
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ship>("stwcModel.FK_ships_users", "ship").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ship>("stwcModel.FK_ships_users", "ship").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<ship> shipReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ship>("stwcModel.FK_ships_users", "ship");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ship>("stwcModel.FK_ships_users", "ship", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("stwcModel", "FK_users_rank", "rank")]
         public rank rank
         {
@@ -922,6 +868,44 @@ namespace STWC_Timesheet
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<user_entry>("stwcModel.FK_user_entry_users", "user_entry", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("stwcModel", "FK_users_ships", "ship")]
+        public ship ship
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ship>("stwcModel.FK_users_ships", "ship").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ship>("stwcModel.FK_users_ships", "ship").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ship> shipReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ship>("stwcModel.FK_users_ships", "ship");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ship>("stwcModel.FK_users_ships", "ship", value);
                 }
             }
         }

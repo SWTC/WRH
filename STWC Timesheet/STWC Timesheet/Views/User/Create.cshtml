@@ -10,6 +10,8 @@
 {
     @Html.ValidationSummary(true)
     @Html.HiddenFor(model => model.password, new { @Value = "Password" })
+    @Html.HiddenFor(model => model.ship_id, new { @Value = 1 })
+    @Html.HiddenFor(model => model.ConfirmPassword, new { @Value = "Password" })
     <div class="regsection">
         <div class="rowDiv">
             <div class="colDiv">

@@ -18,12 +18,6 @@ namespace STWC_Timesheet
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
-            routes.MapRoute(
-                name: "User",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "User", action = "Edit", id = UrlParameter.Optional, currdate = UrlParameter.Optional }
-            );
         }
     }
 }

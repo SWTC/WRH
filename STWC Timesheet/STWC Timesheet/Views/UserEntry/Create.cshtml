@@ -37,7 +37,7 @@
                 @Html.LabelFor(model => model.nc_remarks)
             </div>
             <div class="editor-field">
-                @Html.TextAreaFor(model => model.nc_remarks, new{@readonly = "readonly"})
+                @Html.TextAreaFor(model => model.nc_remarks, new { @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.nc_remarks)
             </div>
             <div class="editor-label">
@@ -164,24 +164,25 @@
         $(document).ready(function () {
             $('.calendar').datepicker({
                 dateFormat: 'dd-mm-yy',
+                maxDate: new Date(),
                 onSelect: function (value, date) {
                     $('#work_date').val(value);
                     var id = $('#user_id').val();
-                    window.location.href = '/UserEntry/Edit/' + id + '?currdate=' + value;
+                    $.ajax({
+                        url: '/UserEntry/LoadWorkedHours',
+                        type: 'POST',
+                        data: { id: id, currdate: value },
+                        success: function (data) {
+                            if (data.entry_id != null) {
+                                window.location.href = '/UserEntry/Edit/' + data.entry_id;
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+
+                        }
+                    });
                 }
             });
-
-            if ($('#hours_list').val() != '') {
-                var arr = $('#hours_list').val().split(",");
-                for (var i = 0; i < arr.length; i++) {
-                    $("#selectable li").eq(arr[i]).addClass('ui-selected');
-                }
-                var currentDate = $('#work_date').val();
-                alert(currentDate);
-                $('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker("setDate", currentDate);
-            }
-
-            $('#work_date').val($('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).val());
 
             var _selectRange = false, _deselectQueue = [];
             $(function () {
@@ -217,6 +218,7 @@
                             count = count + 1;
                         });
 
+                        $('#work_date').val($('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).val());
                         var workedhours = count / 2;
                         var resthours = 24 - workedhours;
                         $('#total_hours').val(workedhours);

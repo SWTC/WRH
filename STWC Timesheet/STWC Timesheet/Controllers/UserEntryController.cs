@@ -82,18 +82,15 @@ namespace STWC_Timesheet.Controllers
             return View(user_entry);
         }
 
-        //[HttpPost]
-        //public ActionResult Edit(int id, DateTime currdate)
-        //{
-        //    var user_entry = (from ue in db.user_entry
-        //                      where ue.user_id == id && ue.work_date == currdate
-        //                      select ue).FirstOrDefault();
-        //    if (user_entry != null)
-        //    {
-        //        return RedirectToAction("Edit", new { id = user_entry.entry_id });
-        //    }
-        //    return View();
-        //}
+        public JsonResult LoadWorkedHours(int id, DateTime currdate)
+        {
+            Session["ssworkdate"] = currdate.ToString();
+            var user_entry = (from ue in db.user_entry
+                              where ue.user_id == id && ue.work_date == currdate
+                              select new{ue.entry_id, ue.user_id, ue.work_date, ue.hours_list, ue.total_hours, ue.comments, ue.nc_remarks}).FirstOrDefault();
+
+            return Json(user_entry, JsonRequestBehavior.AllowGet);
+        }
 
         //
         // POST: /UserEntry/Edit/5
@@ -101,6 +98,16 @@ namespace STWC_Timesheet.Controllers
         [HttpPost]
         public ActionResult Edit(user_entry user_entry)
         {
+            if (user_entry.entry_id == 0)
+            {
+                if(user_entry.work_date == null)
+                {
+                    user_entry.work_date = Convert.ToDateTime(this.Session["ssworkdate"]);
+                }
+                db.user_entry.AddObject(user_entry);
+                db.SaveChanges();
+                return RedirectToAction("Edit", new { id = user_entry.entry_id });
+            }
             if (ModelState.IsValid)
             {
                 db.user_entry.Attach(user_entry);

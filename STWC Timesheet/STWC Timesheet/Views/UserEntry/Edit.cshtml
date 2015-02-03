@@ -166,18 +166,63 @@
         $(document).ready(function () {
             $('.calendar').datepicker({
                 dateFormat: 'dd-mm-yy',
+                maxDate: new Date(),
                 onSelect: function (value, date) {
                     $('#work_date').val(value);
                     var id = $('#user_id').val();
-                    window.location.href = '/UserEntry/Edit/' + id + '?currdate=' + value;
+                    $.ajax({
+                        url: '/UserEntry/LoadWorkedHours',
+                        type: 'POST',
+                        data: { id: id, currdate: value },
+                        success: loadform,
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            
+                        }
+                    });
                 }
             });
+
+            function loadform(data) {
+                if (data != null) {
+                    //total hours
+                    $("#total_hours").val(data.total_hours);
+                    if ($('#total_hours').val() > 14) {
+                        $('td.ui-datepicker-current-day a').addClass('ui-occured');
+                    } else {
+                        $('td.ui-datepicker-current-day a').removeClass('ui-occured');
+                    }
+
+                    //NC Remarks and comments
+                    $("#entry_id").val(data.entry_id);
+                    //$("#user_id").val(data.user_id);
+                    $("#work_date").val(data.work_date);
+                    $("#nc_remarks").val(data.nc_remarks);
+                    $("#comments").val(data.comments);
+
+                    //hours list
+                    $("#selectable li").removeClass('ui-selected');
+                    var arr = (data.hours_list).split(",");
+                    for (var i = 0; i < arr.length; i++) {
+                        $("#selectable li").eq(arr[i]).addClass('ui-selected');
+                    }
+                }
+            }
+
+            var work = $("#work_date").val().split(' ');
+            var workDate = work[0];
+            $(".calendar").datepicker({ dateFormat: 'dd-mm-yy' }).datepicker("setDate", workDate);
 
             if ($('#hours_list').val() != '') {
                 var arr = $('#hours_list').val().split(",");
                 for (var i = 0; i < arr.length; i++) {
                     $("#selectable li").eq(arr[i]).addClass('ui-selected');
                 }
+            }
+
+            if ($('#total_hours').val() > 14) {
+                $('td.ui-datepicker-current-day a').addClass('ui-occured');
+            } else {
+                $('td.ui-datepicker-current-day a').removeClass('ui-occured');
             }
 
             $('#work_date').val($('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).val());

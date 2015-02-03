@@ -10,16 +10,16 @@
           <EntitySet Name="ships" EntityType="stwcModel.Store.ships" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="user_entry" EntityType="stwcModel.Store.user_entry" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="users" EntityType="stwcModel.Store.users" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_ships_users" Association="stwcModel.Store.FK_ships_users">
-            <End Role="users" EntitySet="users" />
-            <End Role="ships" EntitySet="ships" />
-          </AssociationSet>
           <AssociationSet Name="FK_user_entry_users" Association="stwcModel.Store.FK_user_entry_users">
             <End Role="users" EntitySet="users" />
             <End Role="user_entry" EntitySet="user_entry" />
           </AssociationSet>
           <AssociationSet Name="FK_users_rank" Association="stwcModel.Store.FK_users_rank">
             <End Role="rank" EntitySet="rank" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_ships" Association="stwcModel.Store.FK_users_ships">
+            <End Role="ships" EntitySet="ships" />
             <End Role="users" EntitySet="users" />
           </AssociationSet>
         </EntityContainer>
@@ -34,7 +34,7 @@
           <Key>
             <PropertyRef Name="ship_id" />
           </Key>
-          <Property Name="ship_id" Type="int" Nullable="false" />
+          <Property Name="ship_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ship_name" Type="varchar" MaxLength="100" />
           <Property Name="ship_IMO" Type="int" />
           <Property Name="serial_number" Type="int" />
@@ -70,18 +70,6 @@
           <Property Name="cdc_number" Type="varchar" MaxLength="50" />
           <Property Name="ship_id" Type="int" />
         </EntityType>
-        <Association Name="FK_ships_users">
-          <End Role="users" Type="stwcModel.Store.users" Multiplicity="1" />
-          <End Role="ships" Type="stwcModel.Store.ships" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="users">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="ships">
-              <PropertyRef Name="ship_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_user_entry_users">
           <End Role="users" Type="stwcModel.Store.users" Multiplicity="0..1" />
           <End Role="user_entry" Type="stwcModel.Store.user_entry" Multiplicity="*" />
@@ -106,6 +94,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_users_ships">
+          <End Role="ships" Type="stwcModel.Store.ships" Multiplicity="0..1" />
+          <End Role="users" Type="stwcModel.Store.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ships">
+              <PropertyRef Name="ship_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="ship_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -113,10 +113,6 @@
         <EntityContainer Name="stwcEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ships" EntityType="stwcModel.ship" />
           <EntitySet Name="users" EntityType="stwcModel.user" />
-          <AssociationSet Name="FK_ships_users" Association="stwcModel.FK_ships_users">
-            <End Role="user" EntitySet="users" />
-            <End Role="ship" EntitySet="ships" />
-          </AssociationSet>
           <EntitySet Name="ranks" EntityType="stwcModel.rank" />
           <AssociationSet Name="FK_users_rank" Association="stwcModel.FK_users_rank">
             <End Role="rank" EntitySet="ranks" />
@@ -126,6 +122,10 @@
           <AssociationSet Name="FK_user_entry_users" Association="stwcModel.FK_user_entry_users">
             <End Role="user" EntitySet="users" />
             <End Role="user_entry" EntitySet="user_entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_ships" Association="stwcModel.FK_users_ships">
+            <End Role="ship" EntitySet="ships" />
+            <End Role="user" EntitySet="users" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ship">
@@ -137,8 +137,8 @@
           <Property Type="Int32" Name="ship_IMO" />
           <Property Type="Int32" Name="serial_number" />
           <Property Type="String" Name="licence_key" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="user" Relationship="stwcModel.FK_ships_users" FromRole="ship" ToRole="user" />
           <Property Type="String" Name="flag" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="users" Relationship="stwcModel.FK_users_ships" FromRole="ship" ToRole="user" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -156,22 +156,10 @@
           <Property Type="String" Name="cdc_number" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="rank_id" />
           <Property Type="Int32" Name="ship_id" />
-          <NavigationProperty Name="ship" Relationship="stwcModel.FK_ships_users" FromRole="user" ToRole="ship" />
           <NavigationProperty Name="rank" Relationship="stwcModel.FK_users_rank" FromRole="user" ToRole="rank" />
           <NavigationProperty Name="user_entry" Relationship="stwcModel.FK_user_entry_users" FromRole="user" ToRole="user_entry" />
+          <NavigationProperty Name="ship" Relationship="stwcModel.FK_users_ships" FromRole="user" ToRole="ship" />
         </EntityType>
-        <Association Name="FK_ships_users">
-          <End Type="stwcModel.user" Role="user" Multiplicity="1" />
-          <End Type="stwcModel.ship" Role="ship" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="ship">
-              <PropertyRef Name="ship_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="rank">
           <Key>
             <PropertyRef Name="rank_id" />
@@ -214,6 +202,18 @@
             </Principal>
             <Dependent Role="user_entry">
               <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_ships">
+          <End Type="stwcModel.ship" Role="ship" Multiplicity="0..1" />
+          <End Type="stwcModel.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ship">
+              <PropertyRef Name="ship_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="ship_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -297,10 +297,6 @@
       <Diagram Name="stwc" ZoomLevel="82">
         <EntityTypeShape EntityType="stwcModel.ship" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333335" />
         <EntityTypeShape EntityType="stwcModel.user" Width="1.5" PointX="3.875" PointY="0.75" Height="3.9033007812499996" />
-        <AssociationConnector Association="stwcModel.FK_ships_users" >
-          <ConnectorPoint PointX="3.875" PointY="1.8362939453124998" />
-          <ConnectorPoint PointX="2.25" PointY="1.8362939453124998" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="stwcModel.rank" Width="1.5" PointX="8.125" PointY="1.25" Height="1.5956835937499996" />
         <AssociationConnector Association="stwcModel.FK_users_rank" >
           <ConnectorPoint PointX="8.125" PointY="2.047841796875" />
@@ -310,6 +306,10 @@
         <AssociationConnector Association="stwcModel.FK_user_entry_users" >
           <ConnectorPoint PointX="5.375" PointY="3.951650390625" />
           <ConnectorPoint PointX="6.875" PointY="3.951650390625" />
+        </AssociationConnector>
+        <AssociationConnector Association="stwcModel.FK_users_ships" >
+          <ConnectorPoint PointX="2.25" PointY="1.9324446614583339" />
+          <ConnectorPoint PointX="3.875" PointY="1.9324446614583339" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
