@@ -532,66 +532,7 @@ input[type="checkbox"].input-validation-error {
 }
 
 
-/* tables
-----------------------------------------------------------*/
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-top: 0.75em;
-    border: 0 none;
-}
 
-th {
-    font-size: 1.2em;
-    text-align: left;
-    border: none 0px;
-    padding-left: 0;
-}
-
-    th a {
-        display: block;
-        position: relative;
-    }
-
-    th a:link, th a:visited, th a:active, th a:hover {
-        color: #333;
-        font-weight: 600;
-        text-decoration: none;
-        padding: 0;
-    }
-
-    th a:hover {
-        color: #000;
-    }
-
-    th.asc a, th.desc a {
-        margin-right: .75em;
-    }
-
-    th.asc a:after, th.desc a:after {
-        display: block;
-        position: absolute;
-        right: 0em;
-        top: 0;
-        font-size: 0.75em;
-    }
-
-    th.asc a:after {
-        content: '▲';
-    }
-
-    th.desc a:after {
-        content: '▼';
-    }
-
-td {
-    padding: 0.25em 2em 0.25em 0em;
-    border: 0 none;
-}
-
-tr.pager td {
-    padding: 0 0.25em 0 0;
-}
 
 
 /********************
@@ -819,3 +760,21 @@ text-decoration: none;
 
 .ui-occured { background-image: none !important; background-color: #FF0000 !important; color: #FFFFFF !important; }
 .ui-altered { background-image: none !important; background-color: #428bca !important; color: #FFFFFF !important; }
+
+.rptbody    { background-color: #ffffff; padding: 15px; }
+.rptheader, .rptfooter  { font-size: 11px; font-weight: bold; }
+.tdline  { border-bottom: 1px solid #000000; }
+
+#rptcontent table, #rptcontent th, #rptcontent td {
+   border: 1px solid #cccccc;
+   font-size: 11px; font-weight: bold;
+}
+
+#rptcontent #numbersol { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#rptcontent #numbersol li { height: 10px; width: 10px; float: left; border: solid 1px #FFFFFF; } 
+#rptcontent #numbersol li:nth-child(odd) { border-left: solid 2px #FFFFFF; }
+
+#rptcontent #selectable .ui-selected { background: #cccccc; color: white; }
+#rptcontent #selectable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#rptcontent #selectable li { height: 10px; width: 10px; float: left; }
+#rptcontent #selectable li:nth-child(odd) { border-left: solid 2px #666666; }

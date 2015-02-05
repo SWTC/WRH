@@ -1,6 +1,6 @@
-﻿@model STWC_Timesheet.Models.RegisterModel
+﻿@model STWC_Timesheet.user_entry
 @{
-    ViewBag.Title = "Reports";
+    ViewBag.Title = "Report on hours of work";
 }
 
 <hgroup class="title">
@@ -8,15 +8,216 @@
 </hgroup>
 
 @using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 
-    <section class="regsection">
-        <h6>Report Customization as per clients requirement ...</h6>
-    </section>
+    @Html.HiddenFor(model => model.user_id, new { @Value = Session["UserId"] })
+    <div class="rptcontrols">
+        <label style="display:inline;">Range from</label>
+        <input id="txtStartDate" type="datetime" style="width:100px;" />
+        <label style="display:inline;">to</label>
+        <input id="txtEndDate" type="datetime" style="width:100px;" />
+        <input id="btnGenerate" type="button" value="Generate" />
+    </div>
+    <div class="rptbody">
+    <div class="rptheader">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Name</td>
+                <td><label id="lblName"></label></td>
+                <td></td>
+                <td>Vessel</td>
+                <td><label id="lblVessel"></label></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Position</td>
+                <td><label id="lblPosition"></label></td>
+                <td></td>
+                <td>IMO No</td>
+                <td><label id="lblIMO"></label></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Flag</td>
+                <td><label id="lblFlag"></label></td>
+            </tr>
+            <tr>
+                <td colspan="7" style="height: 10px;"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="rptcontent">            
+    </div>
+    <div class="rptfooter">
+        <table cellpadding="0" cellspacing="5px" border="0" width="100%">
+            <tr>
+                <td colspan="6" style="height: 10px;"></td>
+            </tr>
+            <tr>
+                <td colspan="6">I AGREE THAT THIS RECORD IS AN ACCURATE REFLECTION OF THE HOURS OF WORK OR REST OF THE SEAFARER CONCERNED.</td>
+            </tr>
+            <tr>
+                <td colspan="6" style="height: 10px;"></td>
+            </tr>
+            <tr>
+                <td style="width: 200px;">Name of master or person authorized<br />by master to sign this record</td>
+                <td class="tdline"></td>
+                <td style="width: 120px;">Signature of master or<br />authorized person</td>
+                <td class="tdline"></td>
+                <td style="width: 120px;">Signature of seafarer</td>
+                <td class="tdline"></td>
+            </tr>
+            <tr>
+                <td colspan="6" style="height: 10px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2">A copy of this record is to be given to the seafarer. This form is subject<br />to examination and endorsement under procedures established by</td>
+                <td colspan="4" class="tdline"></td>
+            </tr>
+            <tr>
+                <td colspan="6" style="height: 10px;"></td>
+            </tr>
+        </table>
+    </div>
+    </div>
         
-    @Html.ValidationSummary()
+   
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '2014:2050',
+                showButtonPanel: true,
+                dateFormat: 'yy-mm-dd'
+            });
+
+            $("#btnGenerate").click(function () {
+                var id = $('#user_id').val();
+                var fDate = $('#txtStartDate').val();
+                var tDate = $('#txtEndDate').val();
+                $.ajax({
+                    url: '/UserEntry/GenerateReport',
+                    type: 'POST',
+                    data: { Userid: id, fromDate: fDate, toDate: tDate },
+                    success: loadReport,
+                    error: function (jqXHR, textStatus, errorThrown) {
+
+                    }
+                });
+            });
+
+            function loadReport(data) {
+                var alldates = getDates();
+                var alldata = getData(data);
+
+                console.log(alldates);
+                console.log(alldata);
+
+                var combined = alldates.slice(0);
+
+                for (var i = 0; i < alldates.length; i++) {
+                    for (var j = 0; j < alldata.length; j++) {
+                        if (alldates[i].work_date === alldata[j].work_date) {
+                            for (var attrname in alldata[j]) { combined[i][attrname] = alldata[j][attrname]; }
+                        }
+                    }
+                }
+
+                alert(combined);
+
+                if (data != null) {
+                    var week = 0;
+                    var totw = 0;
+                    var totr = 0;
+                    var str = "<table cellpadding='4' cellspacing='0' width='100%'><tr><td colspan='2' style='width: 200px; text-align: right;'>Periods of work are shaded</td>" +
+                              "<td rowspan='2' style='width: 45px; text-align: center;'>Hours of work in 24h period</td>" +
+                              "<td rowspan='2' style='width: 45px; text-align: center;'>Hours of rest in 24h period</td>" +
+                              "<td rowspan='2' style='width: 60px; text-align: center;'>Hours of rest in Date any 7 day period</td></tr>" +
+                              "<tr><td>Date</td><td><ol id='numbersol'><li>0</li><li></li><li>1</li><li></li><li>2</li><li></li><li>3</li><li></li><li>4</li><li></li><li>5</li>" +
+                              "<li></li><li>6</li><li></li><li>7</li><li></li><li>8</li><li></li><li>9</li><li></li><li>10</li><li></li><li>11</li><li></li><li>12</li>" +
+                              "<li></li><li>13</li><li></li><li>14</li><li></li><li>15</li><li></li><li>16</li><li></li><li>17</li><li></li><li>18</li><li></li><li>19</li>" +
+                              "<li></li><li>20</li><li></li><li>21</li><li></li><li>22</li><li></li><li>23</li><li></li></ol></td></tr>";
+                    $.each(data, function (i, item) {
+                        var parsedDate = new Date(parseInt((item.work_date).substr(6)));
+                        var d = new Date(parsedDate); //Date object
+                        var w = item.total_hours;
+                        var r = 24 - w;
+                        week += w;
+                        totw += w;
+                        totr += r;
+
+                        var strli = "<ol id='selectable'>"
+                        var arr = item.hours_list.split(",");
+                        //converting array values to integer
+                        for (var i = 0; i < arr.length; i++) { arr[i] = parseInt(arr[i], 10); }
+                        for (var i = 0; i < 48; i++) {
+                            if ($.inArray(i, arr) > -1) {
+                                strli += "<li class='ui-widget-content ui-selected'></li>";
+                            } else {
+                                strli += "<li class='ui-widget-content'></li>";
+                            }
+                        }
+                        strli += "</ol>";
+
+                        str += "<tr><td>" + d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear() + "</td>";
+                        str += "<td>" + strli + "</td>";
+                        str += "<td>" + w + "</td>";
+                        str += "<td>" + r + "</td>";
+                        str += "<td>" + week + "</td></tr>";
+                    });
+                    str += "<tr><td colspan='2' style='text-align: right;'>Total</td><td>" + totw + "</td><td>" + totr + "</td><td></td></tr></table>";
+                    $("#rptcontent").html('');
+                    $("#rptcontent").append(str);
+                }
+            }
+
+            function getDates() {
+                var startDate = $('#txtStartDate').val().split("-");
+                var s = new Date(startDate[0], startDate[1] - 1, startDate[2]);
+                var stopDate = $('#txtEndDate').val().split("-");
+                var e = new Date(stopDate[0], stopDate[1] - 1, stopDate[2]);
+                var a = '';
+                while (s <= e) {
+                    var str = new Date(s);
+                    var dd = str.getDate();
+                    var mm = str.getMonth() + 1;
+                    var yyyy = str.getFullYear();
+                    var fo = mm + '-' + dd + '-' + yyyy;
+                    a += '{"work_date":"' + fo + '","hours_list":"","total_hours":0},';
+                    s.setDate(s.getDate() + 1);
+                }
+                a = a.substring(0, a.length - 1);
+                a = '[' + a + ']';
+                return a;
+            }
+
+            function getData(data) {
+                var alldata = '';
+                $.each(data, function (i, item) {
+                    var parsedDate = new Date(parseInt((item.work_date).substr(6)));
+                    var str = new Date(parsedDate); //Date object
+                    var dd = str.getDate();
+                    var mm = str.getMonth() + 1;
+                    var yyyy = str.getFullYear();
+                    var fo = mm + '-' + dd + '-' + yyyy;
+                    alldata += '{"work_date":"' + fo + '","hours_list":"' + item.hours_list + '","total_hours":' + item.total_hours + '}';
+                });
+                alldata = '[' + alldata + ']';
+                return alldata;
+            }
+        });
+    </script>
 }

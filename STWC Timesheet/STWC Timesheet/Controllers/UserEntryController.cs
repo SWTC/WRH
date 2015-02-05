@@ -167,5 +167,14 @@ namespace STWC_Timesheet.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        public JsonResult GenerateReport(int Userid, DateTime fromDate, DateTime toDate)
+        {
+            var entry = (from ue in db.user_entry
+                                      where ue.user_id == Userid && ue.work_date >= fromDate && ue.work_date <= toDate
+                              select new { ue.work_date, ue.hours_list, ue.total_hours }).OrderBy(x => x.work_date).ToList();
+
+            return Json(entry, JsonRequestBehavior.AllowGet);
+        }
     }
 }
