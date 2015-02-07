@@ -24,6 +24,11 @@ namespace STWC_Timesheet.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            Key registration = db.Keys.SingleOrDefault();
+            if (registration == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

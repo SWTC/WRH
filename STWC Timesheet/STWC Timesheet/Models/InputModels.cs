@@ -6,6 +6,8 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Net.NetworkInformation;
+using System.Management;
 
 namespace STWC_Timesheet.Models
 {
@@ -14,6 +16,83 @@ namespace STWC_Timesheet.Models
         public user UserModel { get; set; }
         public user_entry UserEntryModel { get; set; }
         public ship ShipModel { get; set; }
+    }
+
+    public class Registration
+    {
+        public static string GetMacAddress()
+        {
+            string macAddresses = "";
+
+            foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                macAddresses = nic.GetPhysicalAddress().ToString();
+                break;
+            }
+            return macAddresses;
+        }
+
+        public static string GetCpuId()
+        {
+            string cpuid = null;
+            try
+            {
+                ManagementObjectSearcher mo = new ManagementObjectSearcher("select * from Win32_Processor");
+                foreach (var item in mo.Get())
+                {
+                    cpuid = item["ProcessorId"].ToString();
+                }
+                return cpuid;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static int GenerateKey()
+        {
+            string mac = GetMacAddress();
+            int sum = 0;
+            int index = 1;
+            foreach (char c in mac)
+            {
+                if (char.IsDigit(c))
+                    sum = sum + Convert.ToInt32(c) * (index * 2);
+                else
+                {
+                    switch (c)
+                    {
+                        case 'A':
+                            sum += sum + 10 * (index * 2);
+                            break;
+                        case 'B':
+                            sum += sum + 11 * (index * 2);
+                            break;
+                        case 'C':
+                            sum += sum + 12 * (index * 2);
+                            break;
+                        case 'D':
+                            sum += sum + 13 * (index * 2);
+                            break;
+                        case 'E':
+                            sum += sum + 14 * (index * 2);
+                            break;
+                        case 'F':
+                            sum += sum + 15 * (index * 2);
+                            break;
+                    }
+                }
+                index++;
+            }
+            return sum;
+        }
+        public static bool ValidateRegistration(string registrationKey)
+        {
+            int serialKey = GenerateKey();
+            serialKey = serialKey * serialKey + 53 / serialKey + 113 * (serialKey / 4);
+            return serialKey.ToString() == registrationKey;
+        }
     }
 }
 
@@ -129,4 +208,11 @@ namespace STWC_Timesheet
         public string comp_name;
     }
 
+    public partial class Key
+    {
+        public static bool ValidateKey(string serialKey, string activationKey)
+        {
+            return false;
+        }
+    }
 }
