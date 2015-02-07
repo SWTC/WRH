@@ -142,7 +142,7 @@ CREATE TABLE [dbo].[user_entry](
 	[entry_id] [int] IDENTITY(1,1) NOT NULL,
 	[user_id] [int] NULL,
 	[work_date] [date] NULL,
-	[hours_list] [varchar](100) NULL,
+	[hours_list] [varchar](200) NULL,
 	[total_hours] [float] NULL,
 	[comments] [varchar](max) NULL,
 	[nc_remarks] [varchar](max) NULL,

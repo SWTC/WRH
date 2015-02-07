@@ -168,6 +168,17 @@ namespace STWC_Timesheet.Controllers
             return View(model);
         }
 
+        public JsonResult GenerateReportHeader(int Userid)
+        {
+            var entry = (from u in db.users
+                         join r in db.ranks on u.rank_id equals r.rank_id
+                         join s in db.ships on u.ship_id equals s.ship_id
+                         where u.user_id == Userid
+                         select new { firstname = u.firstname, lastname = u.lastname, rankname = r.rank_name, shipname = s.ship_name, imonumber = s.ship_IMO, flag = s.flag }).FirstOrDefault();
+
+            return Json(entry, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GenerateReport(int Userid, DateTime fromDate, DateTime toDate)
         {
             var entry = (from ue in db.user_entry

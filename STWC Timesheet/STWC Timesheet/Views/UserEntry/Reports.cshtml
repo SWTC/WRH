@@ -19,72 +19,11 @@
         <input id="btnGenerate" type="button" value="Generate" />
     </div>
     <div class="rptbody">
-    <div class="rptheader">
-        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-            <tr>
-                <td></td>
-                <td></td>
-                <td>Name</td>
-                <td><label id="lblName"></label></td>
-                <td></td>
-                <td>Vessel</td>
-                <td><label id="lblVessel"></label></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td>Position</td>
-                <td><label id="lblPosition"></label></td>
-                <td></td>
-                <td>IMO No</td>
-                <td><label id="lblIMO"></label></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>Flag</td>
-                <td><label id="lblFlag"></label></td>
-            </tr>
-            <tr>
-                <td colspan="7" style="height: 10px;"></td>
-            </tr>
-        </table>
+    <div id="rptheader">
     </div>
     <div id="rptcontent">            
     </div>
-    <div class="rptfooter">
-        <table cellpadding="0" cellspacing="5px" border="0" width="100%">
-            <tr>
-                <td colspan="6" style="height: 10px;"></td>
-            </tr>
-            <tr>
-                <td colspan="6">I AGREE THAT THIS RECORD IS AN ACCURATE REFLECTION OF THE HOURS OF WORK OR REST OF THE SEAFARER CONCERNED.</td>
-            </tr>
-            <tr>
-                <td colspan="6" style="height: 10px;"></td>
-            </tr>
-            <tr>
-                <td style="width: 200px;">Name of master or person authorized<br />by master to sign this record</td>
-                <td class="tdline"></td>
-                <td style="width: 120px;">Signature of master or<br />authorized person</td>
-                <td class="tdline"></td>
-                <td style="width: 120px;">Signature of seafarer</td>
-                <td class="tdline"></td>
-            </tr>
-            <tr>
-                <td colspan="6" style="height: 10px;"></td>
-            </tr>
-            <tr>
-                <td colspan="2">A copy of this record is to be given to the seafarer. This form is subject<br />to examination and endorsement under procedures established by</td>
-                <td colspan="4" class="tdline"></td>
-            </tr>
-            <tr>
-                <td colspan="6" style="height: 10px;"></td>
-            </tr>
-        </table>
+    <div id="rptfooter">
     </div>
     </div>
         
@@ -109,6 +48,15 @@
                 var fDate = $('#txtStartDate').val();
                 var tDate = $('#txtEndDate').val();
                 $.ajax({
+                    url: '/UserEntry/GenerateReportHeader',
+                    type: 'POST',
+                    data: { Userid: id },
+                    success: loadReportHeader,
+                    error: function (jqXHR, textStatus, errorThrown) {
+
+                    }
+                });
+                $.ajax({
                     url: '/UserEntry/GenerateReport',
                     type: 'POST',
                     data: { Userid: id, fromDate: fDate, toDate: tDate },
@@ -118,6 +66,29 @@
                     }
                 });
             });
+
+            function loadReportHeader(data) {
+                var headStr = '<table cellpadding="5px" cellspacing="2px" border="0" width="100%">' +
+                              '<tr><td style="background-color: #EFEEEF;">Name</td><td><label id="lblName">' + data.firstname + ' ' + data.lastname + '</label></td><td></td><td style="background-color: #EFEEEF;">Vessel</td><td><label id="lblVessel">' + data.shipname + '</label></td></tr>' +
+                              '<tr><td style="background-color: #EFEEEF;">Position</td><td><label id="lblPosition">' + data.rankname + '</label></td><td></td><td style="background-color: #EFEEEF;">IMO No</td><td><label id="lblIMO">' + data.imonumber + '</label></td></tr>' +
+                              '<tr><td></td><td></td><td></td><td style="background-color: #EFEEEF;">Flag</td><td><label id="lblFlag">' + data.flag + '</label></td></tr>' +
+                              '<tr><td colspan="5" style="height: 10px;"></td></tr></table>';
+                $("#rptheader").html('');
+                $("#rptheader").append(headStr);
+
+                var footerStr = '<table cellpadding="0" cellspacing="5px" border="0" width="100%">' +
+                                '<tr><td colspan="6" style="height: 10px;"></td></tr>' +
+                                '<tr><td colspan="6">I AGREE THAT THIS RECORD IS AN ACCURATE REFLECTION OF THE HOURS OF WORK OR REST OF THE SEAFARER CONCERNED.</td></tr>' +
+                                '<tr><td colspan="6" style="height: 10px;"></td></tr>' + 
+                                '<tr><td style="width: 200px;">Name of master or person authorized<br />by master to sign this record</td><td class="tdline"></td>' + 
+                                '<td style="width: 120px;">Signature of master or<br />authorized person</td><td class="tdline"></td><td style="width: 120px;">Signature of seafarer</td><td class="tdline"></td></tr>' + 
+                                '<tr><td colspan="6" style="height: 10px;"></td></tr>' + 
+                                '<tr><td colspan="2">A copy of this record is to be given to the seafarer. This form is subject<br />to examination and endorsement under procedures established by</td>' +
+                                '<td colspan="4" class="tdline"></td></tr>' +
+                                '<tr><td colspan="6" style="height: 10px;"></td></tr></table>';
+                $("#rptfooter").html('');
+                $("#rptfooter").append(footerStr);
+            }
 
             function loadReport(data) {
                 var alldates = getDates();
