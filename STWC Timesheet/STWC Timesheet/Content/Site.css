@@ -761,7 +761,7 @@ text-decoration: none;
 .ui-occured { background-image: none !important; background-color: #FF0000 !important; color: #FFFFFF !important; }
 .ui-altered { background-image: none !important; background-color: #428bca !important; color: #FFFFFF !important; }
 
-.rptbody    { background-color: #ffffff; padding: 15px; }
+#rptbody    { background-color: #ffffff; padding: 15px; }
 #rptheader, #rptfooter  { font-size: 11px; font-weight: bold; }
 .tdline  { border-bottom: 1px solid #000000; }
 
@@ -774,7 +774,7 @@ text-decoration: none;
 #rptcontent #numbersol li { height: 10px; width: 10px; float: left; border: solid 1px #FFFFFF; } 
 #rptcontent #numbersol li:nth-child(odd) { border-left: solid 2px #FFFFFF; }
 
-#rptcontent #selectable .ui-selected { background: #cccccc; color: white; }
+#rptcontent #selectable .ui-selected { background: #666666; color: white; line-height: 1; }
 #rptcontent #selectable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-#rptcontent #selectable li { height: 10px; width: 10px; float: left; }
+#rptcontent #selectable li { height: 10px; width: 10px; float: left; border: solid 1px #666666; }
 #rptcontent #selectable li:nth-child(odd) { border-left: solid 2px #666666; }

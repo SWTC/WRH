@@ -17,17 +17,16 @@
         <label style="display:inline;">to</label>
         <input id="txtEndDate" type="datetime" style="width:100px;" />
         <input id="btnGenerate" type="button" value="Generate" />
+        <input id="btnPrint" type="button" value="Print" />
     </div>
-    <div class="rptbody">
-    <div id="rptheader">
+    <div id="rptbody">
+        <div id="rptheader">
+        </div>
+        <div id="rptcontent">            
+        </div>
+        <div id="rptfooter">
+        </div>
     </div>
-    <div id="rptcontent">            
-    </div>
-    <div id="rptfooter">
-    </div>
-    </div>
-        
-   
 }
 
 @section Scripts {
@@ -42,6 +41,15 @@
                 showButtonPanel: true,
                 dateFormat: 'yy-mm-dd'
             });
+
+            $("#btnPrint").click(function () {
+                var printContent = document.getElementById("rptbody").innerHTML;
+                var originalContent = document.body.innerHTML;
+                document.body.innerHTML = printContent;
+                window.print();
+                document.body.innerHTML = originalContent;
+            });
+
 
             $("#btnGenerate").click(function () {
                 var id = $('#user_id').val();
@@ -79,10 +87,10 @@
                 var footerStr = '<table cellpadding="0" cellspacing="5px" border="0" width="100%">' +
                                 '<tr><td colspan="6" style="height: 10px;"></td></tr>' +
                                 '<tr><td colspan="6">I AGREE THAT THIS RECORD IS AN ACCURATE REFLECTION OF THE HOURS OF WORK OR REST OF THE SEAFARER CONCERNED.</td></tr>' +
-                                '<tr><td colspan="6" style="height: 10px;"></td></tr>' + 
-                                '<tr><td style="width: 200px;">Name of master or person authorized<br />by master to sign this record</td><td class="tdline"></td>' + 
-                                '<td style="width: 120px;">Signature of master or<br />authorized person</td><td class="tdline"></td><td style="width: 120px;">Signature of seafarer</td><td class="tdline"></td></tr>' + 
-                                '<tr><td colspan="6" style="height: 10px;"></td></tr>' + 
+                                '<tr><td colspan="6" style="height: 10px;"></td></tr>' +
+                                '<tr><td style="width: 200px;">Name of master or person authorized<br />by master to sign this record</td><td class="tdline"></td>' +
+                                '<td style="width: 120px;">Signature of master or<br />authorized person</td><td class="tdline"></td><td style="width: 120px;">Signature of seafarer</td><td class="tdline"></td></tr>' +
+                                '<tr><td colspan="6" style="height: 10px;"></td></tr>' +
                                 '<tr><td colspan="2">A copy of this record is to be given to the seafarer. This form is subject<br />to examination and endorsement under procedures established by</td>' +
                                 '<td colspan="4" class="tdline"></td></tr>' +
                                 '<tr><td colspan="6" style="height: 10px;"></td></tr></table>';
@@ -91,11 +99,8 @@
             }
 
             function loadReport(data) {
-                var alldates = getDates();
-                var alldata = getData(data);
-
-                console.log(alldates);
-                console.log(alldata);
+                var alldates = eval(getDates());
+                var alldata = eval(getData(data));
 
                 var combined = alldates.slice(0);
 
@@ -107,10 +112,9 @@
                     }
                 }
 
-                alert(combined);
-
                 if (data != null) {
                     var week = 0;
+                    var restlist = [];
                     var totw = 0;
                     var totr = 0;
                     var str = "<table cellpadding='4' cellspacing='0' width='100%'><tr><td colspan='2' style='width: 200px; text-align: right;'>Periods of work are shaded</td>" +
@@ -121,12 +125,18 @@
                               "<li></li><li>6</li><li></li><li>7</li><li></li><li>8</li><li></li><li>9</li><li></li><li>10</li><li></li><li>11</li><li></li><li>12</li>" +
                               "<li></li><li>13</li><li></li><li>14</li><li></li><li>15</li><li></li><li>16</li><li></li><li>17</li><li></li><li>18</li><li></li><li>19</li>" +
                               "<li></li><li>20</li><li></li><li>21</li><li></li><li>22</li><li></li><li>23</li><li></li></ol></td></tr>";
-                    $.each(data, function (i, item) {
-                        var parsedDate = new Date(parseInt((item.work_date).substr(6)));
-                        var d = new Date(parsedDate); //Date object
+                    $.each(combined, function (i, item) {
+                        //var parsedDate = new Date(parseInt((item.work_date).substr(6)));
+                        //var d = new Date(parsedDate); //Date object
                         var w = item.total_hours;
                         var r = 24 - w;
-                        week += w;
+                        restlist[i] = r;
+                        if (i >= 7) {
+                            alert(restlist[i - 7]);
+                            week += (r - restlist[i - 7]);
+                        } else {
+                            week += r;
+                        }
                         totw += w;
                         totr += r;
 
@@ -136,14 +146,13 @@
                         for (var i = 0; i < arr.length; i++) { arr[i] = parseInt(arr[i], 10); }
                         for (var i = 0; i < 48; i++) {
                             if ($.inArray(i, arr) > -1) {
-                                strli += "<li class='ui-widget-content ui-selected'></li>";
+                                strli += "<li class='ui-widget-content ui-selected'>1</li>";
                             } else {
                                 strli += "<li class='ui-widget-content'></li>";
                             }
                         }
                         strli += "</ol>";
-
-                        str += "<tr><td>" + d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear() + "</td>";
+                        str += "<tr><td>" + item.work_date + "</td>";
                         str += "<td>" + strli + "</td>";
                         str += "<td>" + w + "</td>";
                         str += "<td>" + r + "</td>";
@@ -184,8 +193,9 @@
                     var mm = str.getMonth() + 1;
                     var yyyy = str.getFullYear();
                     var fo = mm + '-' + dd + '-' + yyyy;
-                    alldata += '{"work_date":"' + fo + '","hours_list":"' + item.hours_list + '","total_hours":' + item.total_hours + '}';
+                    alldata += '{"work_date":"' + fo + '","hours_list":"' + item.hours_list + '","total_hours":' + item.total_hours + '},';
                 });
+                alldata = alldata.substring(0, alldata.length - 1);
                 alldata = '[' + alldata + ']';
                 return alldata;
             }

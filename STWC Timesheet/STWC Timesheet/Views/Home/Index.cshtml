@@ -3,41 +3,40 @@
 }
 @if (ViewBag.IsRegistered)
 {
-    <h1>
-        Application is registered</h1>
+    <hgroup class="title">
+        <h2>Application is registered</h2>
+    </hgroup>
 }
 else
 {
-    <h1>
-        Application is not registered</h1>
-    <form action="/" method="post">
-    <table>
-        <tr>
-            <td>
-                Serial Key:
-            </td>
-            <td>
-                <input type="text" name="SerialKey" value="@ViewBag.SerialKey" readonly="readonly"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Activation Key:
-            </td>
-            <td>
-                <input type="text" name="ActivationKey" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center">
-            <font color="red">@ViewBag.Error</font> 
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="right">
-                <input type="submit" value="Register" />
-            </td>
-        </tr>
-    </table>
-    </form>
+    <hgroup class="title">
+        <h2>Application is not registered</h2>
+    </hgroup>
+    <section class="regsection">
+        <form action="/" method="post">
+            <table>
+                <tr>
+                    <td>Serial Key:</td>
+                    <td><input type="text" name="SerialKey" value="@ViewBag.SerialKey" readonly="readonly"/></td>
+                </tr>
+                <tr>
+                    <td>Activation Key:</td>
+                    <td><input type="text" name="ActivationKey" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><font color="red">@ViewBag.Error</font></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right"><input type="submit" value="Register" /></td>
+                </tr>
+            </table>
+        </form>
+    </section>
+    <section class="usersection">
+        <p><b>Application Activation</b></p>
+        <p>In order to activate your application, you will need to e-Mail us the serial key, based on the sent serial key we will send you an activation key, which you can use to register the application.</p>
+        <p><b><br />e-Mail us at</b></p>
+        <p><a href="mailto:Support@qualitylabs.com">Support@qualitylabs.com</a></p>
+    </section>
+    
 }

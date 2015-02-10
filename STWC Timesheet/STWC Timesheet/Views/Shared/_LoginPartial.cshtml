@@ -4,7 +4,7 @@
         @if (Convert.ToInt32(Session["RankId"]) == 1)
         {
             <li>@Html.ActionLink("Reports", "Reports", "UserEntry", routeValues: null, htmlAttributes: new { id = "reportLink" })</li>
-            <li>@Html.ActionLink("Data Backup", "Index", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            @*<li>@Html.ActionLink("Data Backup", "Index", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
             <li>@Html.ActionLink("Crew", "Index", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
             <li>@Html.ActionLink("Ship", "Index", "Ship", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
         }

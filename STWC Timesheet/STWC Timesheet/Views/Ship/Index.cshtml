@@ -10,11 +10,14 @@
     
 </p>
 <div style="width:100%; height: 45px;">
-    <div class="leftdiv">@Html.ActionLink("Create New", "Create")</div>
+    @*<div class="leftdiv">@Html.ActionLink("Create New", "Create")</div>*@
 </div>
 <div class="grid">
 <table>
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.serial_number)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.ship_name)
         </th>
@@ -28,6 +31,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.serial_number)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.ship_name)
         </td>

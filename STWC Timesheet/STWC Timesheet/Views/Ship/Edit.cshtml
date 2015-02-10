@@ -19,7 +19,7 @@
                     @Html.LabelFor(model => model.ship_name)
                 </div>
                 <div class="editor-field">
-                    @Html.TextBoxFor(model => model.ship_name, new { @readonly = "readonly" })
+                    @Html.TextBoxFor(model => model.ship_name)
                     @Html.ValidationMessageFor(model => model.ship_name)
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     @Html.LabelFor(model => model.ship_IMO)
                 </div>
                 <div class="editor-field">
-                    @Html.TextBoxFor(model => model.ship_IMO, new { @readonly = "readonly" })
+                    @Html.TextBoxFor(model => model.ship_IMO)
                     @Html.ValidationMessageFor(model => model.ship_IMO)
                 </div>
             </div>
@@ -50,32 +50,8 @@
                     @Html.LabelFor(model => model.serial_number)
                 </div>
                 <div class="editor-field">
-                    @Html.TextBoxFor(model => model.serial_number)
+                    @Html.TextBoxFor(model => model.serial_number, new { @readonly = "readonly" })
                     @Html.ValidationMessageFor(model => model.serial_number)
-                </div>
-            </div>
-            <div class="colDiv">
-                <div class="editor-field" style="padding-top:35px;">
-                    @Html.ActionLink("Copy to clipboard", "Index")
-                    @Html.ActionLink("Email to us", "Index")
-                </div>
-            </div>
-        </div>
-        <div class="rowDiv">
-            <div class="colDiv">
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.licence_key)
-                </div>
-                <div class="editor-field">
-                    @Html.TextBoxFor(model => model.licence_key, new { style = "width:450px;" })
-                    @Html.ValidationMessageFor(model => model.licence_key)
-                </div>
-            </div>
-        </div>
-        <div class="rowDiv">
-            <div class="colDiv">
-                <div class="editor-field" style="padding-top:23px;">
-                    <input type="button" value="Validate" />
                 </div>
             </div>
         </div>
@@ -96,7 +72,7 @@
         </div>
     </section>
     <fieldset style="text-align: right;">
-        <input type="submit" value="Register" />
+        <input type="submit" value="Update" />
     </fieldset>
 }
 

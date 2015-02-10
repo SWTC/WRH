@@ -201,9 +201,6 @@ namespace STWC_Timesheet
         [Display(Name = "Serial No.")]
         public string serial_number;
 
-        [Display(Name = "licence key")]
-        public string licence_key;
-
         [Display(Name = "Computer Name")]
         public string comp_name;
     }

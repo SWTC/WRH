@@ -14,7 +14,7 @@ namespace STWC_Timesheet.Controllers
         public ActionResult Index()
         {
             CheckRegistration();
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.Message = "";
 
             return View();
         }
@@ -32,6 +32,22 @@ namespace STWC_Timesheet.Controllers
                     actKey.ActivationKey = Request.Params["ActivationKey"].ToString();
                     db.Keys.AddObject(actKey);
                     db.SaveChanges();
+
+                    ship serShip = new ship();
+                    serShip.serial_number = Request.Params["SerialKey"].ToString();
+                    db.ships.AddObject(serShip);
+                    db.SaveChanges();
+
+                    user adm = new user();
+                    adm.firstname = "Admin";
+                    adm.lastname = "Admin";
+                    adm.user_name = "admin";
+                    adm.password = "P@ssw0rd";
+                    adm.ship_id = serShip.ship_id;
+                    adm.rank_id = 1;
+                    db.users.AddObject(adm);
+                    db.SaveChanges();
+
                     return RedirectToAction("Login", "Account");
                 }
                 ViewBag.Error = "Invalid Activation Key. Please contact the administartor";
@@ -57,6 +73,7 @@ namespace STWC_Timesheet.Controllers
         private void CheckRegistration()
         {
             string serialKey = Registration.GenerateKey().ToString();
+            ViewBag.IsRegistered = false;
             ViewBag.SerialKey = serialKey;
             Key registration = db.Keys.SingleOrDefault();
             if (registration == null)

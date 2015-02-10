@@ -46,6 +46,22 @@ namespace STWC_Timesheet.Controllers
             var user_entry = (from ue in db.user_entry
                               where ue.user_id == userid && ue.work_date == curdate
                                select ue).FirstOrDefault();
+
+            var yest_user_entry = (from ue in db.user_entry
+                                   where ue.user_id == userid && ue.work_date == yesdate
+                                   select ue).FirstOrDefault();
+            if (yest_user_entry != null)
+            {
+                ViewBag.yester = yest_user_entry;
+            }
+
+            var tom_user_entry = (from ue in db.user_entry
+                                  where ue.user_id == userid && ue.work_date == tomdate
+                                  select ue).FirstOrDefault();
+            if (tom_user_entry != null)
+            {
+                ViewBag.tom = tom_user_entry;
+            }
             if (user_entry != null)
             {
                 return RedirectToAction("Edit", new { id = user_entry.entry_id });
