@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "STWC";
     var resCheck = Convert.ToBoolean(TempData["IsRegistered"]);
+    var serialKey = TempData["SerialKey"].ToString();
 }
 @if (resCheck)
 {
@@ -18,7 +19,7 @@ else
             <table>
                 <tr>
                     <td>Serial Key:</td>
-                    <td><input type="text" name="SerialKey" value="@ViewBag.SerialKey" readonly="readonly"/></td>
+                    <td><input type="text" name="SerialKey" value="@serialKey" readonly="readonly"/></td>
                 </tr>
                 <tr>
                     <td>Activation Key:</td>

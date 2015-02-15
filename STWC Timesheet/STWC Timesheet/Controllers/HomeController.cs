@@ -13,10 +13,7 @@ namespace STWC_Timesheet.Controllers
 
         public ActionResult Index()
         {
-            CheckRegistration();
-            ViewBag.Message = "";
-
-            return View();
+            return CheckRegistration();
         }
 
         [HttpPost]
@@ -75,7 +72,8 @@ namespace STWC_Timesheet.Controllers
         {
             string serialKey = Registration.GenerateKey().ToString();
             //ViewBag.IsRegistered = false;
-            ViewBag.SerialKey = serialKey;
+            //ViewBag.SerialKey = serialKey;
+            TempData["SerialKey"] = serialKey;
             Key registration = db.Keys.SingleOrDefault();
             if (registration == null)
             {
@@ -83,9 +81,10 @@ namespace STWC_Timesheet.Controllers
             }
             else
             {
-                if (Key.ValidateKey(registration.SerialKey, registration.ActivationKey))
+                if (Registration.ValidateRegistration(registration.ActivationKey))
                 {
                     TempData["IsRegistered"] = true;
+                    return RedirectToAction("Login", "Account");
                 }
                 else
                 {
