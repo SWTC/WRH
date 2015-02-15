@@ -1,7 +1,8 @@
 ﻿@{
     ViewBag.Title = "STWC";
+    var resCheck = Convert.ToBoolean(TempData["IsRegistered"]);
 }
-@if (ViewBag.IsRegistered)
+@if (resCheck)
 {
     <hgroup class="title">
         <h2>Application is registered</h2>

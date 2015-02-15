@@ -70,27 +70,29 @@ namespace STWC_Timesheet.Controllers
             return View();
         }
 
-        private void CheckRegistration()
+        [AllowAnonymous]
+        private ActionResult CheckRegistration()
         {
             string serialKey = Registration.GenerateKey().ToString();
-            ViewBag.IsRegistered = false;
+            //ViewBag.IsRegistered = false;
             ViewBag.SerialKey = serialKey;
             Key registration = db.Keys.SingleOrDefault();
             if (registration == null)
             {
-                ViewBag.IsRegistered = false;
+                TempData["IsRegistered"] = false;
             }
             else
             {
                 if (Key.ValidateKey(registration.SerialKey, registration.ActivationKey))
                 {
-                    ViewBag.IsRegistered = true;
+                    TempData["IsRegistered"] = true;
                 }
                 else
                 {
-                    ViewBag.IsRegistered = false;
+                    TempData["IsRegistered"] = false;
                 }
             }
+            return View();
         }
     }
 }
