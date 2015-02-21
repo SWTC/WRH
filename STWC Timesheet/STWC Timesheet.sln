@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STCW Timesheet", "STWC Time
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyGenerator", "KeyGenerator\KeyGenerator.csproj", "{91930772-08D5-4DB0-85EE-52CDAC7CED1C}"
 EndProject
-Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "STCW Timesheet.csproj_deploy", "STCW Timesheet.csproj_deploy\STCW Timesheet.csproj_deploy.wdproj", "{DA81140B-9CA5-4265-BEB5-668BF615682F}"
-EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "STCWSetup", "STCWSetup\STCWSetup.vdproj", "{BCB4BE5E-7B05-4988-A9C6-A6A9E76E77B6}"
 EndProject
 Global
@@ -39,16 +37,6 @@ Global
 		{91930772-08D5-4DB0-85EE-52CDAC7CED1C}.Release|Mixed Platforms.Build.0 = Release|x86
 		{91930772-08D5-4DB0-85EE-52CDAC7CED1C}.Release|x86.ActiveCfg = Release|x86
 		{91930772-08D5-4DB0-85EE-52CDAC7CED1C}.Release|x86.Build.0 = Release|x86
-		{DA81140B-9CA5-4265-BEB5-668BF615682F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA81140B-9CA5-4265-BEB5-668BF615682F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA81140B-9CA5-4265-BEB5-668BF615682F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{DA81140B-9CA5-4265-BEB5-668BF615682F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{DA81140B-9CA5-4265-BEB5-668BF615682F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DA81140B-9CA5-4265-BEB5-668BF615682F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA81140B-9CA5-4265-BEB5-668BF615682F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA81140B-9CA5-4265-BEB5-668BF615682F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{DA81140B-9CA5-4265-BEB5-668BF615682F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{DA81140B-9CA5-4265-BEB5-668BF615682F}.Release|x86.ActiveCfg = Release|Any CPU
 		{BCB4BE5E-7B05-4988-A9C6-A6A9E76E77B6}.Debug|Any CPU.ActiveCfg = Debug
 		{BCB4BE5E-7B05-4988-A9C6-A6A9E76E77B6}.Debug|Mixed Platforms.ActiveCfg = Debug
 		{BCB4BE5E-7B05-4988-A9C6-A6A9E76E77B6}.Debug|x86.ActiveCfg = Debug
