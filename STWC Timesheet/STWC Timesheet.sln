@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STWC Timesheet", "STWC Timesheet\STWC Timesheet.csproj", "{9030F4D3-C0EB-49BB-966B-D58C3E337C1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STCW Timesheet", "STWC Timesheet\STCW Timesheet.csproj", "{9030F4D3-C0EB-49BB-966B-D58C3E337C1C}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "STWCSetup", "..\STWCSetup\STWCSetup.vdproj", "{AAB1B9DE-6062-4A1B-9B88-6ADB7D454391}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "STCWSetup", "..\STWCSetup\STWCSetup.vdproj", "{AAB1B9DE-6062-4A1B-9B88-6ADB7D454391}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyGenerator", "KeyGenerator\KeyGenerator.csproj", "{91930772-08D5-4DB0-85EE-52CDAC7CED1C}"
 EndProject
