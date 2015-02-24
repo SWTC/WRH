@@ -169,7 +169,7 @@
                     $('#work_date').val(value);
                     var id = $('#user_id').val();
                     $.ajax({
-                        url: '/UserEntry/LoadWorkedHours',
+                        url: '@Url.Action("LoadWorkedHours", "UserEntry")',
                         type: 'POST',
                         data: { id: id, currdate: value },
                         success: function (data) {
