@@ -325,7 +325,7 @@
           <ConnectorPoint PointX="8.125" PointY="2.047841796875" />
           <ConnectorPoint PointX="5.375" PointY="2.047841796875" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="stwcModel.user_entry" Width="1.5" PointX="6.875" PointY="3.25" Height="2.3648893229166656" />
+        <EntityTypeShape EntityType="stwcModel.user_entry" Width="1.5" PointX="6.875" PointY="3.25" Height="2.5571907552083317" />
         <AssociationConnector Association="stwcModel.FK_user_entry_users" >
           <ConnectorPoint PointX="5.375" PointY="3.951650390625" />
           <ConnectorPoint PointX="6.875" PointY="3.951650390625" />

@@ -168,13 +168,33 @@ INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Administrator')
 GO
 INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Chief Engineer')
 GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('First Engineer')
+GO
 INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Second Engineer')
 GO
 INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Third Engineer')
 GO
 INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Fourth Engineer')
 GO
-INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Elect Officer')
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Junior Engineer')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Engine Cadet')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Electrical 0fficer')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Junior Electrical Officer')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Engine Fitter')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Oiler 1')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Oiler 2')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Oiler 3')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Wiper')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Master')
 GO
 INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Chief Officer')
 GO
@@ -182,9 +202,31 @@ INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Second Officer')
 GO
 INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Third Officer')
 GO
-INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Gas Engineer')
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Radio Officer')
 GO
-INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Deck User1')
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Deck Cadet 1')
 GO
-INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Deck User2')
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Deck Cadet 2')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Bosun')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Deck Fitter')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Pump Man')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('A.B 1')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('A.B 2')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('A.B 3')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('O.S 1')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('O.S 2')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('O.S 3')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Chief Cook')
+GO
+INSERT INTO [STCW].[dbo].[rank] ([rank_name]) VALUES ('Mess Man')
 GO

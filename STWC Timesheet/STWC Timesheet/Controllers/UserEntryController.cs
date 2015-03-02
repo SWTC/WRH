@@ -41,27 +41,10 @@ namespace STWC_Timesheet.Controllers
         {
             int userid = Convert.ToInt32(Session["UserId"]);
             DateTime curdate = DateTime.Today;
-            DateTime yesdate = DateTime.Today.AddDays(-1);
-            DateTime tomdate = DateTime.Today.AddDays(1);
             var user_entry = (from ue in db.user_entry
                               where ue.user_id == userid && ue.work_date == curdate
                                select ue).FirstOrDefault();
 
-            var yest_user_entry = (from ue in db.user_entry
-                                   where ue.user_id == userid && ue.work_date == yesdate
-                                   select ue).FirstOrDefault();
-            if (yest_user_entry != null)
-            {
-                ViewBag.yester = yest_user_entry;
-            }
-
-            var tom_user_entry = (from ue in db.user_entry
-                                  where ue.user_id == userid && ue.work_date == tomdate
-                                  select ue).FirstOrDefault();
-            if (tom_user_entry != null)
-            {
-                ViewBag.tom = tom_user_entry;
-            }
             if (user_entry != null)
             {
                 return RedirectToAction("Edit", new { id = user_entry.entry_id });
@@ -98,12 +81,23 @@ namespace STWC_Timesheet.Controllers
             return View(user_entry);
         }
 
-        public JsonResult LoadWorkedHours(int id, DateTime currdate)
+        public JsonResult LoadWorkedHours(int id, string currdate)
         {
-            Session["ssworkdate"] = currdate.ToString();
+            DateTime pDate = DateTime.ParseExact(currdate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime yesdate = pDate.AddDays(-1);
+            Session["ssworkdate"] = pDate.ToString();
             var user_entry = (from ue in db.user_entry
-                              where ue.user_id == id && ue.work_date == currdate
-                              select new{ue.entry_id, ue.user_id, ue.work_date, ue.hours_list, ue.total_hours, ue.comments, ue.nc_remarks}).FirstOrDefault();
+                              where ue.user_id == id && (DateTime.Compare(ue.work_date.Value, yesdate) >= 0 && DateTime.Compare(ue.work_date.Value, pDate) <= 0)
+                              select new { ue.entry_id, ue.user_id, ue.work_date, ue.hours_list, ue.total_hours, ue.comments, ue.nc_remarks }).OrderBy(x => x.work_date).ToList();
+
+            return Json(user_entry, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult LoadNCDates(int id, int monthNum)
+        {
+            var user_entry = (from ue in db.user_entry
+                              where ue.user_id == id && ue.work_date.Value.Month == monthNum && ue.nc_remarks != null
+                              select new { ue.work_date }).ToList();
 
             return Json(user_entry, JsonRequestBehavior.AllowGet);
         }
@@ -169,6 +163,22 @@ namespace STWC_Timesheet.Controllers
 
         public ActionResult Reports()
         {
+            if (Convert.ToInt32(Session["RankId"]) == 1)
+            {
+                var crewlist = (from c in db.users
+                                where c.rank_id != 1
+                                select new { value = c.user_id, text = c.firstname + " " + c.lastname }).ToList();
+                ViewBag.crew_list = new SelectList(crewlist, "value", "text");
+            }
+            else
+            {
+                int uid = Convert.ToInt32(Session["UserId"]);
+                var crewlist = (from c in db.users
+                                where c.user_id == uid
+                                select new { value = c.user_id, text = c.firstname + " " + c.lastname }).ToList();
+                ViewBag.crew_list = new SelectList(crewlist, "value", "text");
+            }
+            
             return View();
         }
 

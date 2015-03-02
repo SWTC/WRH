@@ -10,8 +10,9 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    @Html.HiddenFor(model => model.user_id, new { @Value = Session["UserId"] })
     <div class="rptcontrols">
+        <label style="display:inline;">Crew Member</label>
+        @Html.DropDownListFor(model => model.user_id, (SelectList)ViewBag.crew_list)
         <label style="display:inline;">Range from</label>
         <input id="txtStartDate" type="datetime" style="width:100px;" />
         <label style="display:inline;">to</label>
@@ -56,7 +57,7 @@
                 var fDate = $('#txtStartDate').val();
                 var tDate = $('#txtEndDate').val();
                 $.ajax({
-                    url: '/UserEntry/GenerateReportHeader',
+                    url: '@Url.Action("GenerateReportHeader", "UserEntry")',
                     type: 'POST',
                     data: { Userid: id },
                     success: loadReportHeader,
@@ -65,7 +66,7 @@
                     }
                 });
                 $.ajax({
-                    url: '/UserEntry/GenerateReport',
+                    url: '@Url.Action("GenerateReport", "UserEntry")',
                     type: 'POST',
                     data: { Userid: id, fromDate: fDate, toDate: tDate },
                     success: loadReport,
@@ -77,7 +78,7 @@
 
             function loadReportHeader(data) {
                 var headStr = '<table cellpadding="5px" cellspacing="2px" border="0" width="100%">' +
-                              '<tr><td style="background-color: #EFEEEF;">Name</td><td><label id="lblName">' + data.firstname + ' ' + data.lastname + '</label></td><td></td><td style="background-color: #EFEEEF;">Vessel</td><td><label id="lblVessel">' + data.shipname + '</label></td></tr>' +
+                              '<tr><td rowspan="4" style="width:100px;"><img src="../../Content/images/imo-logo.gif" style="width:80px; height:85px; border:0;" /></td><td style="background-color: #EFEEEF;">Name</td><td><label id="lblName">' + data.firstname + ' ' + data.lastname + '</label></td><td></td><td style="background-color: #EFEEEF;">Vessel</td><td><label id="lblVessel">' + data.shipname + '</label></td></tr>' +
                               '<tr><td style="background-color: #EFEEEF;">Position</td><td><label id="lblPosition">' + data.rankname + '</label></td><td></td><td style="background-color: #EFEEEF;">IMO No</td><td><label id="lblIMO">' + data.imonumber + '</label></td></tr>' +
                               '<tr><td></td><td></td><td></td><td style="background-color: #EFEEEF;">Flag</td><td><label id="lblFlag">' + data.flag + '</label></td></tr>' +
                               '<tr><td colspan="5" style="height: 10px;"></td></tr></table>';
@@ -132,7 +133,6 @@
                         var r = 24 - w;
                         restlist[i] = r;
                         if (i >= 7) {
-                            alert(restlist[i - 7]);
                             week += (r - restlist[i - 7]);
                         } else {
                             week += r;

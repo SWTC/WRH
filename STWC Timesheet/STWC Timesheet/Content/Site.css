@@ -754,6 +754,12 @@ text-decoration: none;
 #selectable li { height: 16px; width: 16px; float: left; }
 #selectable li:nth-child(odd) { border-left: solid 2px #666666; }
 
+#yestselectable .ui-selecting { background: #666666; }
+#yestselectable .ui-selected { background: #428bca; color: white; }
+#yestselectable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#yestselectable li { height: 16px; width: 16px; float: left; }
+#yestselectable li:nth-child(odd) { border-left: solid 2px #666666; }
+
 .normal { padding: 0 10px 0 5px;  margin: 3px; border: solid 1px #666666; background-color: #DBDBDB; }
 .occured { padding: 0 10px 0 5px; margin: 3px; border: solid 1px #666666; background-color: #FF0000; }
 .altered { padding: 0 10px 0 5px; margin: 3px; border: solid 1px #666666; background-color: #428bca; }

@@ -17,7 +17,6 @@
         <div style="margin: 10px 0 10px 0;">
             <span class="normal"></span> Normal
             <span class="occured"></span> Occured N/C
-            <span class="altered"></span> Altered
         </div>
     </div>
     <div class="halfDiv"  style="width: 60%;">
@@ -103,6 +102,56 @@
             <li>23</li>
             <li></li>
         </ol>
+        <ol id="yestselectable" style="display: none;">
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+          <li class="ui-widget-content"></li>
+        </ol>
         <ol id="selectable">
           <li class="ui-widget-content"></li>
           <li class="ui-widget-content"></li>
@@ -162,28 +211,20 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            var ncDates = [];
             $('.calendar').datepicker({
-                dateFormat: 'dd-mm-yy',
+                dateFormat: 'yy-mm-dd',
                 maxDate: new Date(),
                 onSelect: function (value, date) {
                     $('#work_date').val(value);
                     var id = $('#user_id').val();
-                    $.ajax({
-                        url: '@Url.Action("LoadWorkedHours", "UserEntry")',
-                        type: 'POST',
-                        data: { id: id, currdate: value },
-                        success: function (data) {
-                            if (data.entry_id != null) {
-                                window.location.href = '/UserEntry/Edit/' + data.entry_id;
-                            }
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-
-                        }
-                    });
+                    loadWorkHours();
                 }
             });
 
+            loadWorkHours();      
+
+            //code for selector
             var _selectRange = false, _deselectQueue = [];
             $(function () {
                 $("#selectable").selectable({
@@ -221,12 +262,39 @@
                         var longrest = 0;
                         var shortrest = 0;
                         var currentrest = 0;
-                        arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
-                        for (var i = 0; i <= 47; i++) {
-                            if (!$("#selectable li").eq(arr[i]).hasClass('ui-selected')) {
+                        var longwork = 0;
+                        var shortwork = 0;
+                        var currentwork = 0;
+                        arrStatic = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
+                        for (var a = 0; a <= 47; a++) {
+                            if (!$("#yestselectable li").eq(arrStatic[a]).hasClass('ui-selected')) {
                                 currentrest += 1;
+                                if (shortwork > longwork)
+                                    longwork = shortwork;
+
+                                shortwork = currentwork;
+                                currentwork = 0;
                             }
                             else {
+                                currentwork += 1;
+                                if (shortrest > longrest)
+                                    longrest = shortrest;
+
+                                shortrest = currentrest;
+                                currentrest = 0;
+                            }
+                        }
+                        for (var m = 0; m <= 47; m++) {
+                            if (!$("#selectable li").eq(arrStatic[m]).hasClass('ui-selected')) {
+                                currentrest += 1;
+                                if (shortwork > longwork)
+                                    longwork = shortwork;
+
+                                shortwork = currentwork;
+                                currentwork = 0;
+                            }
+                            else {
+                                currentwork += 1;
                                 if (shortrest > longrest)
                                     longrest = shortrest;
 
@@ -238,9 +306,14 @@
                             longrest = currentrest;
 
                         $('#work_date').val($('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).val());
-                        var workedhours = count / 2;
+                        var workedhours = 0;
+                        if (count > longwork) {
+                            workedhours = count / 2
+                        } else {
+                            workedhours = longwork / 2;
+                        }
                         var resthours = 24 - workedhours;
-                        $('#total_hours').val(workedhours);
+                        $('#total_hours').val(count / 2);
                         $('#hours_list').val(result.substr(0, result.length - 1));
 
                         var errMsg10 = '';
@@ -266,7 +339,7 @@
                         else {
                             finalMsg = errMsg10 + errMsg6;
                         }
-                        
+
                         if (finalMsg.trim() == '') {
                             $('td.ui-datepicker-current-day a').removeClass('ui-occured');
                             $('#nc_remarks').val('');
@@ -278,5 +351,70 @@
                 });
             });
         });
+
+        function loadWorkHours() {
+            var dat = $('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+            var id = $('#user_id').val();
+            $.ajax({
+                url: '@Url.Action("LoadWorkedHours", "UserEntry")',
+                type: 'POST',
+                data: { id: id, currdate: dat },
+                success: function (data) {
+                    if (data != null) {
+                        var currDate = $('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+                        var yestDate = new Date($('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).val());
+                        yestDate = new Date(yestDate.setDate(yestDate.getDate() - 1));
+                        var dd = ("0" + yestDate.getDate()).slice(-2);
+                        var mm = ("0" + (yestDate.getMonth() + 1)).slice(-2);
+                        var yyyy = yestDate.getFullYear();
+                        yestDate = yyyy + "-" + mm + "-" + dd;
+
+                        $("#yestselectable li").removeClass('ui-selected');
+                        $("#selectable li").removeClass('ui-selected');
+                        $("#total_hours").val('');
+                        $("#nc_remarks").val('');
+                        $("#comments").val('');
+
+                        for (var j = 0; j < data.length; j++) {
+                            if (ConvertJsonDateString(data[j].work_date) == yestDate) {
+                                if (data[j].hours_list != '') {
+                                    var arryest = (data[j].hours_list).split(",");
+                                    for (var i = 0; i < arryest.length; i++) {
+                                        $("#yestselectable li").eq(arryest[i]).addClass('ui-selected');
+                                    }
+                                }
+                            } else if (ConvertJsonDateString(data[j].work_date) == currDate) {
+                                window.location.href = '/UserEntry/Edit/' + data[j].entry_id;
+                            }
+                        }
+                    } else {
+                        $("#total_hours").val('');
+                        $("#nc_remarks").val('');
+                        $("#comments").val('');
+                        $("#selectable li").removeClass('ui-selected');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                }
+            });
+        }
+
+        function ConvertJsonDateString(jsonDate) {
+            var shortDate = null;
+            if (jsonDate) {
+                var regex = /-?\d+/;
+                var matches = regex.exec(jsonDate);
+                var dt = new Date(parseInt(matches[0]));
+                var month = dt.getMonth() + 1;
+                var monthString = month > 9 ? month : '0' + month;
+                var day = dt.getDate();
+                var dayString = day > 9 ? day : '0' + day;
+                var year = dt.getFullYear();
+                shortDate = year + '-' + monthString + '-' + dayString;
+            }
+            return shortDate;
+        };
+
     </script>
 }

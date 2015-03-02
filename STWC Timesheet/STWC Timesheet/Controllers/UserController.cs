@@ -54,6 +54,7 @@ namespace STWC_Timesheet.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.ship_id = 1;
                 db.users.AddObject(model);
                 db.SaveChanges();
 
@@ -175,7 +176,14 @@ namespace STWC_Timesheet.Controllers
             oldUser.password = model.password;
             db.ObjectStateManager.ChangeObjectState(oldUser, EntityState.Modified);
             db.SaveChanges();
-            return RedirectToAction("Index", "User");
+            if (Convert.ToInt32(Session["RankId"]) == 1)
+            {
+                return RedirectToAction("Index", "User");
+            }
+            else 
+            {
+                return RedirectToAction("Create", "UserEntry");
+            }
         }
 
         protected override void Dispose(bool disposing)
