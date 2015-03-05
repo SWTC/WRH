@@ -93,6 +93,19 @@ namespace STWC_Timesheet.Controllers
             return Json(user_entry, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult LoadWeekHours(int id, string currdate)
+        {
+            DateTime pDate = DateTime.ParseExact(currdate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime wdate = pDate.AddDays(-6);
+            var weeklycount = from ue in db.user_entry
+                              where ue.user_id == id && (DateTime.Compare(ue.work_date.Value, wdate) >= 0 && DateTime.Compare(ue.work_date.Value, pDate) < 0)
+                              select new { ue.user_id, ue.total_hours } into h
+                              group h by new {h.user_id} into g
+                              select new { TotHours = g.Sum(t => (double?)t.total_hours), RowCount = g.Count()};
+
+            return Json(weeklycount, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult LoadNCDates(int id, int monthNum)
         {
             var user_entry = (from ue in db.user_entry

@@ -212,6 +212,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var ncDates = [];
+            var weekhours = 0;
             $('.calendar').datepicker({
                 dateFormat: 'yy-mm-dd',
                 maxDate: new Date(),
@@ -222,7 +223,23 @@
                 }
             });
 
-            loadWorkHours();      
+            var dat = $('.calendar').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+            var id = $('#user_id').val();
+            $.ajax({
+                url: '@Url.Action("LoadWeekHours", "UserEntry")',
+                type: 'POST',
+                data: { id: id, currdate: dat },
+                success: function (data) {
+                    if (data != null) {
+                        weekhours = data[0].TotHours;
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                }
+            });
+
+            loadWorkHours();
 
             //code for selector
             var _selectRange = false, _deselectQueue = [];
@@ -284,6 +301,8 @@
                                 currentrest = 0;
                             }
                         }
+                        longrest = 0;
+                        currentrest = 0;
                         for (var m = 0; m <= 47; m++) {
                             if (!$("#selectable li").eq(arrStatic[m]).hasClass('ui-selected')) {
                                 currentrest += 1;
@@ -318,6 +337,7 @@
 
                         var errMsg10 = '';
                         var errMsg6 = '';
+                        var errMsg7 = '';
                         var finalMsg = '';
                         $('#nc_remarks').val('');
 
@@ -333,11 +353,23 @@
                             errMsg6 = "";
                         }
 
-                        if (errMsg10 != '' && errMsg6 != '') {
-                            finalMsg = errMsg10 + " " + errMsg6;
+                        if ((weekhours + (count / 2)) > 91) {
+                            errMsg7 = "77 hours of rest in any seven-day period";
+                        } else {
+                            errMsg7 = "";
+                        }
+
+                        if (errMsg10 != '' && errMsg6 != '' && errMsg7 != '') {
+                            finalMsg = errMsg10 + ", " + errMsg6 + ", " + errMsg7;
+                        } else if (errMsg10 != '' && errMsg6 != '') {
+                            finalMsg = errMsg10 + ", " + errMsg6;
+                        } else if (errMsg10 != '' && errMsg7 != '') {
+                            finalMsg = errMsg10 + ", " + errMsg7;
+                        } else if (errMsg6 != '' && errMsg7 != '') {
+                            finalMsg = errMsg6 + ", " + errMsg7;
                         }
                         else {
-                            finalMsg = errMsg10 + errMsg6;
+                            finalMsg = errMsg10 + errMsg6 + errMsg7;
                         }
 
                         if (finalMsg.trim() == '') {
